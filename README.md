@@ -1,1 +1,1 @@
-# capybara_toolkit
+# Capybara toolkit
