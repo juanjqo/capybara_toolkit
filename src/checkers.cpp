@@ -1,5 +1,5 @@
-#include "checkers.h"
-#include "capytypes.h"
+#include "capybara/checkers.h"
+#include "capybara/capytypes.h"
 
 namespace Capybara {
 
@@ -12,8 +12,8 @@ namespace Capybara {
  * @return True if matrices A and B have the same number of columns.
  *         False otherwise.
  */
-bool Checkers::check_column_matrix_sizes(const Eigen::MatrixXd &A,
-                                         const Eigen::MatrixXd &B,
+bool Checkers::check_column_matrix_sizes(const MatrixXd &A,
+                                         const MatrixXd &B,
                                          const Checkers::MODE& mode)
 {
     int n_A = A.cols();
@@ -40,8 +40,8 @@ bool Checkers::check_column_matrix_sizes(const Eigen::MatrixXd &A,
  * @return True if matrices A and B have the same number of rows.
  *         False otherwise.
  */
-bool Checkers::check_row_matrix_sizes(const Eigen::MatrixXd &A,
-                                      const Eigen::MatrixXd &B,
+bool Checkers::check_row_matrix_sizes(const MatrixXd &A,
+                                      const MatrixXd &B,
                                       const Checkers::MODE &mode)
 {
     int m_A = A.rows();
