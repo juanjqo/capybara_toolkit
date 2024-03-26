@@ -5,10 +5,12 @@ namespace Capybara {
 
 /**
  * @brief Checkers::check_column_matrix_sizes
- * @param A
- * @param B
- * @param mode
- * @return
+ * @param A Matrix A
+ * @param B Matrix B
+ * @param mode PANIC if you want to throw a runtime error if
+ *        matrices A and B have do not have the same number of columns.
+ * @return True if matrices A and B have the same number of columns.
+ *         False otherwise.
  */
 bool Checkers::check_column_matrix_sizes(const Eigen::MatrixXd &A,
                                          const Eigen::MatrixXd &B,
@@ -28,6 +30,16 @@ bool Checkers::check_column_matrix_sizes(const Eigen::MatrixXd &A,
 
 }
 
+
+/**
+ * @brief Checkers::check_row_matrix_sizes
+ * @param A Matrix A
+ * @param B Matrix B
+ * @param mode PANIC if you want to throw a runtime error if
+ *        matrices A and B have do not have the same number of rows.
+ * @return True if matrices A and B have the same number of rows.
+ *         False otherwise.
+ */
 bool Checkers::check_row_matrix_sizes(const Eigen::MatrixXd &A,
                                       const Eigen::MatrixXd &B,
                                       const Checkers::MODE &mode)
