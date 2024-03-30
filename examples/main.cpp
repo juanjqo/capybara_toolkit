@@ -31,9 +31,11 @@ int main()
     std::vector<VectorXd> VV = {v1,v2};
 
     std::cout<<Capybara::Capynum::linspace(v1, v2, 5)<<std::endl;
-    std::cout<<Capybara::Capynum::std_vector_vectorxd_to_vectorxd(VV);
+    std::cout<<Capybara::Capynum::std_vector_vectorxd_to_vectorxd(VV)<<std::endl;
 
-    Capybara::Checkers::check_equal_sizes(VV,VM);
+    std::vector<std::string> names = {"joint1", "joint2", "joint3"};
+
+    std::cout<<Capybara::Checkers::check_equal_sizes(VV,VM, names, Capybara::Checkers::MODE::DO_NOT_PANIC)<<std::endl;
 
     return 0;
 }

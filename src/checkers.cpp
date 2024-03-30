@@ -1,5 +1,4 @@
-//#include "capybara/checkers.hpp"
-//#include "capybara/capytypes.hpp"
+#include "capybara/checkers.hpp"
 
 namespace Capybara {
 
@@ -21,7 +20,8 @@ bool Checkers::check_column_matrix_sizes(const MatrixXd &A,
     if (n_A != n_B)
     {
         if (mode == Checkers::MODE::PANIC )
-            throw std::runtime_error(std::string("Incompatible sizes. The cols of Matrix A and B must have the same dimensions. ")
+            throw std::runtime_error(std::string("Panic with Capybara::Checkers::check_column_matrix_sizes(A, B). ")
+                                 + std::string("Incompatible sizes. The cols of Matrix A and B must have the same dimensions. ")
                                  + std::string("But A is ")+ std::to_string(A.rows())+ std::string("x")+ std::to_string(n_A)
                                  + std::string(" and B is ")+ std::to_string(B.rows()) + std::string("x")+ std::to_string(n_B));
         return FAIL;
@@ -49,7 +49,8 @@ bool Checkers::check_row_matrix_sizes(const MatrixXd &A,
     if (m_A != m_B)
     {
         if (mode == Checkers::MODE::PANIC )
-            throw std::runtime_error(std::string("Incompatible sizes. The rows of Matrix A and B must have the same dimensions. ")
+            throw std::runtime_error(std::string("Panic with Capybara::Checkers::check_row_matrix_sizes(A, B). ")
+                                 + std::string("Incompatible sizes. The rows of Matrix A and B must have the same dimensions. ")
                                  + std::string("But A is ")+ std::to_string(m_A)+ std::string("x")+ std::to_string(A.cols())
                                  + std::string(" and B is ")+ std::to_string(m_B) + std::string("x")+ std::to_string(B.cols()));
         return FAIL;
