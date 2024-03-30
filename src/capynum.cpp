@@ -1,4 +1,4 @@
-#include "capybara/capynum.h"
+#include "capybara/capynum.hpp"
 
 namespace Capybara {
 
@@ -15,7 +15,6 @@ VectorXd Capynum::std_vector_vectorxd_to_vectorxd(std::vector<VectorXd> &std_vec
         q = Capynum::vstack(q, vec);
     }
     return q;
-
 }
 
 MatrixXd Capynum::vstack(const MatrixXd &A, const MatrixXd &B)

@@ -21,8 +21,8 @@ if(APPLE)
 endif()
 
 set(CAPYBARA_HEADERS
-    ${CAPYBARA_DIR}/include/capybara/checkers.h
-    ${CAPYBARA_DIR}/include/capybara/capynum.h)
+    ${CAPYBARA_DIR}/include/capybara/checkers.hpp
+    ${CAPYBARA_DIR}/include/capybara/capynum.hpp)
 
 set(CAPYBARA_SOURCES
     ${CAPYBARA_DIR}/src/checkers.cpp

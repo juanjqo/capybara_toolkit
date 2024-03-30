@@ -1,5 +1,5 @@
 #include <iostream>
-#include "capybara.h"
+#include "capybara.hpp"
 
 #ifdef _WIN32
 #include <Eigen/Dense>
@@ -32,6 +32,8 @@ int main()
 
     std::cout<<Capybara::Capynum::linspace(v1, v2, 5)<<std::endl;
     std::cout<<Capybara::Capynum::std_vector_vectorxd_to_vectorxd(VV);
+
+    Capybara::Checkers::check_equal_sizes(VV,VM);
 
     return 0;
 }

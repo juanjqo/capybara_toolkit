@@ -1,5 +1,5 @@
-#include "capybara/checkers.h"
-#include "capybara/capytypes.h"
+//#include "capybara/checkers.hpp"
+//#include "capybara/capytypes.hpp"
 
 namespace Capybara {
 
@@ -57,6 +57,9 @@ bool Checkers::check_row_matrix_sizes(const MatrixXd &A,
     return SUCCESS;
 
 }
+
+
+
 
 }
 
