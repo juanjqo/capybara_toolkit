@@ -40,9 +40,6 @@ public:
                 throw std::runtime_error("Both containers have diferrent sizes. ");
             return FAIL;
         }
-
-        std::cout<<"Size 1: "<<static_cast<std::size_t>(v1.size())<<std::endl;
-        std::cout<<"Size 2: "<<static_cast<std::size_t>(v2.size())<<std::endl;
         return true;
     }
 
