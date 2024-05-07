@@ -14,7 +14,7 @@ include(FetchContent)
 FetchContent_Declare(capybara
     GIT_REPOSITORY https://github.com/juanjqo/capybara_toolkit
     SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/capybara
-    GIT_TAG PUT_HERE_THE_COMMIT_YOU_WANT # Ex:  GIT_TAG 31df12a692c64b29ffcb8311ceaab1853d8f0338
+    GIT_TAG main 
 )
 FetchContent_MakeAvailable(capybara)
 set (CAPYBARA_DIR ${capybara_SOURCE_DIR})
