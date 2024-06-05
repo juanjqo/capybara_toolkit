@@ -37,5 +37,7 @@ int main()
 
     std::cout<<Capybara::Checkers::check_equal_sizes(VV,VM, names, Capybara::Checkers::MODE::DO_NOT_PANIC)<<std::endl;
 
+    auto v3 = Capybara::Numpy::vstack(v1, v2);
+    std::cout<<"v3: "<<v3<<std::endl;
     return 0;
 }

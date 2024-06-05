@@ -60,6 +60,45 @@ bool Checkers::check_row_matrix_sizes(const MatrixXd &A,
 }
 
 
+/**
+ * @brief Checkers::check_constraint_sizes checks if the constraint set constraint A*x <= b or Ax = b
+ *        have compatible sizes.
+ * @param A
+ * @param b
+ * @param optimization_vector_size
+ * @param mode
+ * @return
+ */
+bool Checkers::check_constraint_sizes(const MatrixXd &A, const VectorXd &b, const double &optimization_vector_size, const MODE &mode)
+{
+    int m = A.rows();
+    int n = A.cols();
+    int nb = b.size();
+
+    if ( n != optimization_vector_size)
+    {
+        if (mode == Checkers::MODE::PANIC )
+            throw std::runtime_error(std::string("Panic with Capybara::Checkers::check_constraint_sizes(A, b, dim). ")
+                                     + std::string("Incompatible sizes. The cols of Matrix A must have the same dimension of ")
+                                     + std::string("the optimization vector, which is ") + std::to_string(optimization_vector_size)
+                                     + std::string(". But the cols of A is ") + std::to_string(n));
+        return FAIL;
+    }
+    if (m != nb)
+    {
+        if (mode == Checkers::MODE::PANIC )
+            throw std::runtime_error(std::string("Panic with Capybara::Checkers::check_constraint_sizes(A, b, dim). ")
+                                     + std::string("Incompatible sizes. The rows of Matrix A must have the same dimension of Vector b. ")
+                                     + std::string("But you used A ")+ std::to_string(m)+ std::string("x")+ std::to_string(n)
+                                     + std::string(" and b ")+ std::to_string(nb) + std::string("x1"));
+        return FAIL;
+    }
+
+    return SUCCESS;
+}
+
+
+
 
 
 }

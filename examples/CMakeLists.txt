@@ -11,4 +11,5 @@ include(${CAPYBARA_DIR}/capybara_library.cmake)
 add_executable(examples main.cpp)
 target_link_libraries(examples capybara)
 
-
+add_executable(example2 example2.cpp)
+target_link_libraries(example2 capybara)

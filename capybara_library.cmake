@@ -25,6 +25,7 @@ set(CAPYBARA_HEADERS
     ${CAPYBARA_DIR}/include/capybara/numpy.hpp
     ${CAPYBARA_DIR}/include/capybara/conversions.hpp
     ${CAPYBARA_DIR}/include/capybara/numerical.hpp
+    ${CAPYBARA_DIR}/include/capybara/constraints_manager.hpp
 )
 
 set(CAPYBARA_SOURCES
@@ -32,6 +33,7 @@ set(CAPYBARA_SOURCES
     ${CAPYBARA_DIR}/src/numpy.cpp
     ${CAPYBARA_DIR}/src/conversions.cpp
     ${CAPYBARA_DIR}/src/numerical.cpp
+    ${CAPYBARA_DIR}/src/constraints_manager.cpp
 )
 
 add_library(capybara ${CAPYBARA_HEADERS} ${CAPYBARA_SOURCES})

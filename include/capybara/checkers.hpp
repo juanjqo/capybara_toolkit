@@ -1,8 +1,7 @@
 #pragma once
 
 
-#include "capybara/capytypes.hpp"
-#include <iostream>
+#include <capybara/capytypes.hpp>
 #ifdef _WIN32
 #include <Eigen/Dense>
 #else
@@ -26,6 +25,11 @@ public:
                                        const MatrixXd& B,
                                        const MODE& mode = Checkers::MODE::PANIC);
 
+
+    static bool check_constraint_sizes(const MatrixXd& A,
+                                       const VectorXd& b,
+                                       const double& optimization_vector_size,
+                                       const MODE& mode = Checkers::MODE::PANIC);
 
     template<typename T, typename U>
     static bool check_equal_sizes(const T &v1,

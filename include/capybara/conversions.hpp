@@ -1,7 +1,6 @@
 #pragma once
-#include "capybara/capytypes.hpp"
-#include "capybara/numpy.hpp"
-#include <iostream>
+#include <capybara/capytypes.hpp>
+#include <capybara/numpy.hpp>
 
 #ifdef _WIN32
 #include <Eigen/Dense>
