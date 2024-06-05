@@ -1,4 +1,4 @@
-#include "capybara/numpy.hpp"
+#include <capybara/numpy.hpp>
 
 namespace Capybara {
 

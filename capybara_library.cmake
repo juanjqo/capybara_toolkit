@@ -24,12 +24,14 @@ set(CAPYBARA_HEADERS
     ${CAPYBARA_DIR}/include/capybara/checkers.hpp
     ${CAPYBARA_DIR}/include/capybara/numpy.hpp
     ${CAPYBARA_DIR}/include/capybara/conversions.hpp
+    ${CAPYBARA_DIR}/include/capybara/numerical.hpp
 )
 
 set(CAPYBARA_SOURCES
     ${CAPYBARA_DIR}/src/checkers.cpp
     ${CAPYBARA_DIR}/src/numpy.cpp
     ${CAPYBARA_DIR}/src/conversions.cpp
+    ${CAPYBARA_DIR}/src/numerical.cpp
 )
 
 add_library(capybara ${CAPYBARA_HEADERS} ${CAPYBARA_SOURCES})

@@ -1,4 +1,4 @@
-#include "capybara/conversions.hpp"
+#include <capybara/conversions.hpp>
 
 namespace Capybara {
 

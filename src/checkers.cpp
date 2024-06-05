@@ -1,4 +1,4 @@
-#include "capybara/checkers.hpp"
+#include <capybara/checkers.hpp>
 
 namespace Capybara {
 
