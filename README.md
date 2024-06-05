@@ -4,7 +4,7 @@
 
 <img src=https://github.com/juanjqo/capybara_toolkit/assets/23158313/2e0dbd2d-9b12-4930-9ffe-511d8270de03 width='250'>
 
-A library for C++17 with an incomplete collection of useful classes and functions based on Eigen and more.
+A library for C++20 with an incomplete collection of useful classes and functions based on Eigen and more.
 
 
 #### Include capybara_toolkit via CMake 
