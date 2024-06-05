@@ -2,7 +2,13 @@
 
 namespace Capybara {
 
-
+/**
+ * @brief Numpy::vstack stacks matrices in sequence vertically
+ * @param A
+ * @param B
+ * @return The matrix [A;
+ *                     B]
+ */
 MatrixXd Numpy::vstack(const MatrixXd &A, const MatrixXd &B)
 {
     Checkers::check_column_matrix_sizes(A,B);
@@ -16,6 +22,13 @@ MatrixXd Numpy::vstack(const MatrixXd &A, const MatrixXd &B)
     return C;
 }
 
+
+/**
+ * @brief Numpy::hstack stacks matrices in sequence horizontally
+ * @param A
+ * @param B
+ * @return The matrix [A B]
+ */
 MatrixXd Numpy::hstack(const MatrixXd &A, const MatrixXd &B)
 {
     Checkers::check_row_matrix_sizes(A,B);
@@ -29,6 +42,12 @@ MatrixXd Numpy::hstack(const MatrixXd &A, const MatrixXd &B)
     return C;
 }
 
+
+/**
+ * @brief Numpy::block_diag creates a diagonal matrix
+ * @param A The vector of matrices;
+ * @return The diagonal matrix composed of elements of A.
+ */
 MatrixXd Numpy::block_diag(const std::vector<MatrixXd> &A)
 {
     int m = 0;
@@ -52,12 +71,28 @@ MatrixXd Numpy::block_diag(const std::vector<MatrixXd> &A)
     return J;
 }
 
+
+/**
+ * @brief Numpy::block_diag creates a diagonal matrix
+ * @param A The vector of doubles.
+ * @return The diagonal matrix composed of elements of A.
+ */
 MatrixXd Numpy::block_diag(const std::vector<double> &A)
 {
     std::vector<double> vec = A;
     return Capybara::Conversions::std_vector_double_to_vectorxd(vec).asDiagonal();
 }
 
+
+/**
+ * @brief Numpy::resize resizes a matrix A to a larger matrix of size (rowsxcols) that containts
+ *               the matrix A. The additional elements are zeros.
+ * @param A
+ * @param rows
+ * @param cols
+ * @return The matrix [A 0
+ *                     0 0]
+ */
 MatrixXd Numpy::resize(const MatrixXd &A, const int &rows, const int &cols)
 {
     MatrixXd aux = MatrixXd::Zero(rows, cols);
@@ -84,11 +119,26 @@ MatrixXd Numpy::resize(const MatrixXd &A, const int &rows, const int &cols)
 
 }
 
+/**
+ * @brief Numpy::linspace
+ * @param start
+ * @param stop
+ * @param size
+ * @return
+ */
 VectorXd Numpy::linspace(const double &start, const double &stop, const int &size)
 {
     return VectorXd::LinSpaced(size, start, stop);
 }
 
+
+/**
+ * @brief Numpy::linspace
+ * @param start
+ * @param stop
+ * @param size
+ * @return
+ */
 MatrixXd Numpy::linspace(const VectorXd &start, const VectorXd &stop, const int &size)
 {
     if (start.size() != stop.size())
