@@ -1,5 +1,6 @@
 #pragma once
 #include <capybara/checkers.hpp>
+#include <capybara/conversions.hpp>
 
 #ifdef _WIN32
 #include <Eigen/Dense>
@@ -11,11 +12,9 @@ using namespace Eigen;
 
 namespace Capybara {
 
-class Capynum
+class Numpy
 {
 public:
-    static VectorXd std_vector_double_to_vectorxd(std::vector<double> &std_vector);
-    static VectorXd std_vector_vectorxd_to_vectorxd(std::vector<VectorXd>& std_vectorxd);
     static MatrixXd vstack(const MatrixXd& A, const MatrixXd& B);
     static MatrixXd hstack(const MatrixXd& A, const MatrixXd& B);
     static MatrixXd block_diag(const std::vector<MatrixXd>& A);

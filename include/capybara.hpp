@@ -3,4 +3,4 @@
 
 
 #include <capybara/checkers.hpp>
-#include <capybara/capynum.hpp>
+#include <capybara/numpy.hpp>

@@ -22,11 +22,15 @@ endif()
 
 set(CAPYBARA_HEADERS
     ${CAPYBARA_DIR}/include/capybara/checkers.hpp
-    ${CAPYBARA_DIR}/include/capybara/capynum.hpp)
+    ${CAPYBARA_DIR}/include/capybara/numpy.hpp
+    ${CAPYBARA_DIR}/include/capybara/conversions.hpp
+)
 
 set(CAPYBARA_SOURCES
     ${CAPYBARA_DIR}/src/checkers.cpp
-    ${CAPYBARA_DIR}/src/capynum.cpp)
+    ${CAPYBARA_DIR}/src/numpy.cpp
+    ${CAPYBARA_DIR}/src/conversions.cpp
+)
 
 add_library(capybara ${CAPYBARA_HEADERS} ${CAPYBARA_SOURCES})
 include_directories(${CAPYBARA_DIR}/include/)
