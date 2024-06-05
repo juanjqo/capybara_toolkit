@@ -25,12 +25,21 @@
 
 namespace Capybara {
 
-
+/**
+ * @brief Capybara::Conversions::std_vector_double_to_vectorxd
+ * @param std_vector
+ * @return
+ */
 Eigen::VectorXd Capybara::Conversions::std_vector_double_to_vectorxd(std::vector<double> &std_vector)
 {
     return Eigen::Map<VectorXd>(std_vector.data(), std_vector.size());
 }
 
+/**
+ * @brief Conversions::std_vector_vectorxd_to_vectorxd
+ * @param std_vectorxd
+ * @return
+ */
 VectorXd Conversions::std_vector_vectorxd_to_vectorxd(std::vector<VectorXd> &std_vectorxd)
 {
     VectorXd q;

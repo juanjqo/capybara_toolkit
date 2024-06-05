@@ -26,6 +26,12 @@
 class Numerical
 {
 
+/**
+ * @brief numerical_matrix_differentiation
+ * @param J
+ * @param T
+ * @return
+ */
 std::vector<Eigen::MatrixXd> numerical_matrix_differentiation(const std::vector<MatrixXd> &J,
                                                               const double &T)
 {
