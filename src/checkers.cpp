@@ -47,9 +47,9 @@ bool Checkers::check_column_matrix_sizes(const MatrixXd &A,
                                  + std::string("Incompatible sizes. The cols of Matrix A and B must have the same dimensions. ")
                                  + std::string("But A is ")+ std::to_string(A.rows())+ std::string("x")+ std::to_string(n_A)
                                  + std::string(" and B is ")+ std::to_string(B.rows()) + std::string("x")+ std::to_string(n_B));
-        return FAIL;
+        return Capybara::FAIL;
     }
-    return SUCCESS;
+    return Capybara::SUCCESS;
 
 }
 
@@ -76,9 +76,9 @@ bool Checkers::check_row_matrix_sizes(const MatrixXd &A,
                                  + std::string("Incompatible sizes. The rows of Matrix A and B must have the same dimensions. ")
                                  + std::string("But A is ")+ std::to_string(m_A)+ std::string("x")+ std::to_string(A.cols())
                                  + std::string(" and B is ")+ std::to_string(m_B) + std::string("x")+ std::to_string(B.cols()));
-        return FAIL;
+        return Capybara::FAIL;
     }
-    return SUCCESS;
+    return Capybara::SUCCESS;
 
 }
 
@@ -105,7 +105,7 @@ bool Checkers::check_constraint_sizes(const MatrixXd &A, const VectorXd &b, cons
                                      + std::string("Incompatible sizes. The cols of Matrix A must have the same dimension of ")
                                      + std::string("the optimization vector, which is ") + std::to_string(optimization_vector_size)
                                      + std::string(". But the cols of A is ") + std::to_string(n));
-        return FAIL;
+        return Capybara::FAIL;
     }
     if (m != nb)
     {
@@ -114,10 +114,10 @@ bool Checkers::check_constraint_sizes(const MatrixXd &A, const VectorXd &b, cons
                                      + std::string("Incompatible sizes. The rows of Matrix A must have the same dimension of Vector b. ")
                                      + std::string("But you used A ")+ std::to_string(m)+ std::string("x")+ std::to_string(n)
                                      + std::string(" and b ")+ std::to_string(nb) + std::string("x1"));
-        return FAIL;
+        return Capybara::FAIL;
     }
 
-    return SUCCESS;
+    return Capybara::SUCCESS;
 }
 
 

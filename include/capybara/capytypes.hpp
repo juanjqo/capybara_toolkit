@@ -4,7 +4,7 @@
 
 namespace Capybara {
 
-    const bool FAIL = false;
-    const bool SUCCESS = true;
+    constexpr bool FAIL = false;
+    constexpr bool SUCCESS = true;
 
 }
