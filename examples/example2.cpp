@@ -21,4 +21,15 @@ int main()
     auto [A_, b_] = cm.get_inequality_constraints();
     auto v = Capybara::Conversions::double2vector(180, 10);
     std::cout<<Capybara::Conversions::deg2rad(v).transpose()<<std::endl;
+
+    auto lim = Capybara::CVectorXd({1,2,3,4,5});
+
+    std::cout<<lim.transpose()<<std::endl;
+    auto M = Capybara::CMatrixXd({
+                                 {1,2,3,4},
+                                 {4,5,6,7},
+                                 {8,9,10,11}
+                                });
+    std::cout<<M<<std::endl;
+
 }

@@ -6,3 +6,4 @@
 #include <capybara/numpy.hpp>
 #include <capybara/constraints_manager.hpp>
 #include <capybara/capytypes.hpp>
+#include <capybara/utils.hpp>

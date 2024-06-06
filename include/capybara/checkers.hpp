@@ -53,6 +53,22 @@ public:
                                        const double& optimization_vector_size,
                                        const MODE& mode = Checkers::MODE::PANIC);
 
+    template<typename T>
+    static bool check_for_equal_elements(const std::vector<T>& vector,
+                                         const MODE& mode = Checkers::MODE::PANIC)
+    {
+        if (std::all_of(vector.cbegin(), vector.cend(), [vector](int i) { return i == vector.at(0); }))
+        {
+            return true;
+        }else{
+            if (mode == Checkers::MODE::PANIC)
+            {
+                throw std::runtime_error("Panic with Capybara::check_for_equal_elements(vector). The vector containts different elements. ");
+            }
+            return false;
+        }
+    }
+
     template<typename T, typename U>
     static bool check_equal_sizes(const T &v1,
                                   const U &v2,
@@ -63,7 +79,7 @@ public:
         if (s1 != s2)
         {
             if (mode == Checkers::MODE::PANIC)
-                throw std::runtime_error("Panic with Capybara::Checkers::check_equal_sizes(v1, v2). Both containers have diferrent sizes. ");
+                throw std::runtime_error("Panic with Capybara::Checkers::check_equal_sizes(v1, v2). Both containers have diferent sizes. ");
             return FAIL;
         }
         return SUCCESS;
