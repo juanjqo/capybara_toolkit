@@ -26,6 +26,7 @@ set(CAPYBARA_HEADERS
     ${CAPYBARA_DIR}/include/capybara/conversions.hpp
     ${CAPYBARA_DIR}/include/capybara/numerical.hpp
     ${CAPYBARA_DIR}/include/capybara/constraints_manager.hpp
+    ${CAPYBARA_DIR}/include/capybara/capytypes.hpp
 )
 
 set(CAPYBARA_SOURCES

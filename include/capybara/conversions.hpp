@@ -40,6 +40,11 @@ class Conversions
 public:
     static VectorXd std_vector_double_to_vectorxd(std::vector<double> &std_vector);
     static VectorXd std_vector_vectorxd_to_vectorxd(std::vector<VectorXd>& std_vectorxd);
+    static VectorXd double2vector(const double& value, const int& size);
+    static double   rad2deg(const double& rad);
+    static VectorXd rad2deg(const VectorXd& rad);
+    static double   deg2rad(const double& deg);
+    static VectorXd deg2rad(const VectorXd& deg);
 };
 }
 

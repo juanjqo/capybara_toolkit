@@ -50,4 +50,72 @@ VectorXd Conversions::std_vector_vectorxd_to_vectorxd(std::vector<VectorXd> &std
     return q;
 }
 
+/**
+ * @brief Conversions::double2vector
+ * @param value
+ * @param size
+ * @return
+ */
+VectorXd Conversions::double2vector(const double &value, const int &size)
+{
+    VectorXd output = VectorXd(size);
+    for (auto i = 0; i<size; i++)
+    {
+        output(i) = value;
+    }
+    return output;
+}
+
+/**
+ * @brief Conversions::rad2deg
+ * @param rad
+ * @return
+ */
+double Conversions::rad2deg(const double &rad)
+{
+    return rad*(180/Capybara::pi);
+}
+
+/**
+ * @brief Conversions::rad2deg
+ * @param rad
+ * @return
+ */
+VectorXd Conversions::rad2deg(const VectorXd &rad)
+{
+    VectorXd output = rad;
+    for (size_t i = 0; auto& value : rad)
+    {
+        output(i) = rad2deg(value);
+        ++i;
+    }
+    return output;
+}
+
+/**
+ * @brief Conversions::deg2rad
+ * @param deg
+ * @return
+ */
+double Conversions::deg2rad(const double &deg)
+{
+    return deg*(Capybara::pi/180);
+}
+
+/**
+ * @brief Conversions::deg2rad
+ * @param deg
+ * @return
+ */
+VectorXd Conversions::deg2rad(const VectorXd &deg)
+{
+    VectorXd output = deg;
+    for (size_t i = 0; auto& value : deg)
+    {
+        output(i) = deg2rad(value);
+        ++i;
+    }
+    return output;
+}
+
 }

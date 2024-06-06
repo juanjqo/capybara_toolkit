@@ -19,6 +19,6 @@ int main()
     auto cm = Capybara::ConstraintsManager(3);
     cm.add_inequality_constraint(A,b);
     auto [A_, b_] = cm.get_inequality_constraints();
-    std::cout<<A_<<std::endl;
-    std::cout<<b_<<std::endl;
+    auto v = Capybara::Conversions::double2vector(180, 10);
+    std::cout<<Capybara::Conversions::deg2rad(v).transpose()<<std::endl;
 }
