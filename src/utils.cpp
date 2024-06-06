@@ -46,7 +46,7 @@ MatrixXd Capybara::CMatrixXd(const std::vector<std::vector<double>>& mat)
     for (auto i=0;i<rows;i++)
         sizes.at(i) = mat.at(i).size();
 
-    if (!Capybara::Checkers::check_for_equal_elements(sizes, Capybara::Checkers::MODE::DO_NOT_PANIC))
+    if (!Capybara::Checkers::check_equal_elements(sizes, Capybara::Checkers::MODE::DO_NOT_PANIC))
         throw std::runtime_error("Panic with Capybara::MatrixXd(). Wrong number of elements. "
                                  "All vector must have the same dimension.  ");
 

@@ -54,7 +54,7 @@ public:
                                        const MODE& mode = Checkers::MODE::PANIC);
 
     template<typename T>
-    static bool check_for_equal_elements(const std::vector<T>& vector,
+    static bool check_equal_elements(const std::vector<T>& vector,
                                          const MODE& mode = Checkers::MODE::PANIC)
     {
         if (std::all_of(vector.cbegin(), vector.cend(), [vector](int i) { return i == vector.at(0); }))
