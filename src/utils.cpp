@@ -1,14 +1,45 @@
+/*
+#    Copyright (c) 2024 Juan Jose Quiroz Omana
+#
+#    Capybara_toolkit is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Lesser General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    Capybara_toolkit is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Lesser General Public License for more details.
+#
+#    You should have received a copy of the GNU Lesser General Public License
+#    along with Capybara_toolkit.  If not, see <https://www.gnu.org/licenses/>.
+#
+# ################################################################
+#
+#   Author: Juan Jose Quiroz Omana, (email: juanjqogm@gmail.com)
+#
+# ################################################################
+*/
+
 #include <capybara/utils.hpp>
 
-#include <iostream>
-
+/**
+ * @brief Capybara::CVectorXd
+ * @param vec
+ * @return
+ */
 VectorXd Capybara::CVectorXd(const std::vector<double> &vec)
 {
     std::vector<double> myvec = vec;
     return Capybara::Conversions::std_vector_double_to_vectorxd(myvec);
 }
 
-MatrixXd Capybara::CMatrixXd(const std::vector<std::vector<double> > &mat)
+/**
+ * @brief Capybara::CMatrixXd
+ * @param mat
+ * @return
+ */
+MatrixXd Capybara::CMatrixXd(const std::vector<std::vector<double>>& mat)
 {
     int rows = mat.size();
     std::vector<int> sizes(rows, 0);
