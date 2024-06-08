@@ -180,4 +180,37 @@ MatrixXd Numpy::linspace(const VectorXd &start, const VectorXd &stop, const int 
 
 }
 
+MatrixXd Numpy::symmetric(const MatrixXd &J)
+{
+    return J.transpose()*J;
+}
+
+MatrixXd Numpy::symmetric(const MatrixXd &J, const double &damping)
+{
+    return J.transpose()*J + damping*MatrixXd::Identity(J.cols(),J.cols());
+}
+
+/**
+ * @brief Numpy::symmetric_and_linear_component given the quadratic program
+ *
+ *          min(x) ||J*x + gain*task_error|| + damping*||x||,
+ *
+ *          this method returns the tuple {H, f},
+ *          where H = J.T*J + damping*Identity, and f = gain*J.transpose()*task_error.
+ *
+ *
+ * @param J
+ * @param damping
+ * @param gain
+ * @param task_error
+ * @return
+ */
+std::tuple<MatrixXd, VectorXd> Numpy::symmetric_and_linear_component(const MatrixXd& J,
+                                                                     const double &damping,
+                                                                     const double& gain,
+                                                                     const VectorXd& task_error)
+{
+    return {Capybara::Numpy::symmetric(J, damping), gain*J.transpose()*task_error};
+}
+
 }

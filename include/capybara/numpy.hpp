@@ -45,7 +45,13 @@ public:
     static MatrixXd resize(const MatrixXd& A, const int& rows, const int& cols);
     static VectorXd linspace(const double& start, const double& stop, const int& size);
     static MatrixXd linspace(const VectorXd& start, const VectorXd& stop, const int& size);
-
+    static MatrixXd symmetric(const MatrixXd& J);
+    static MatrixXd symmetric(const MatrixXd& J, const double& damping);
+    static std::tuple<MatrixXd, VectorXd>
+    symmetric_and_linear_component(const MatrixXd& J,
+                                   const double& damping,
+                                   const double& gain,
+                                   const VectorXd& task_error);
 };
 }
 

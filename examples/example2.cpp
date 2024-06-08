@@ -30,6 +30,8 @@ int main()
                                  {4,5,6,7},
                                  {8,9,10,11}
                                 });
-    std::cout<<M<<std::endl;
+    auto [H, f] = Capybara::Numpy::symmetric_and_linear_component(M, 0.001, 2, VectorXd::Zero(4));
+    std::cout<<H<<std::endl;
+    std::cout<<f<<std::endl;
 
 }
