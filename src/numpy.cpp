@@ -210,6 +210,10 @@ std::tuple<MatrixXd, VectorXd> Numpy::symmetric_and_linear_component(const Matri
                                                                      const double& gain,
                                                                      const VectorXd& task_error)
 {
+    if (task_error.size()!= J.rows())
+        throw std::runtime_error("The matrix J and the task_error vector have incompatible sizes");
+
+
     return {Capybara::Numpy::symmetric(J, damping), gain*J.transpose()*task_error};
 }
 

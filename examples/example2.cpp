@@ -11,6 +11,11 @@ using namespace Eigen;
 
 int main()
 {
+    //const auto start{std::chrono::steady_clock::now()};
+    auto clock = Capybara::Cronos();
+    clock.tic();
+    //std::chrono::time_point ts = start;
+
     MatrixXd A = MatrixXd::Zero(2,3);
     A << 1,2,3,4,5,6;
     VectorXd b = VectorXd::Zero(2);
@@ -20,18 +25,24 @@ int main()
     cm.add_inequality_constraint(A,b);
     auto [A_, b_] = cm.get_inequality_constraints();
     auto v = Capybara::Conversions::double2vector(180, 10);
-    std::cout<<Capybara::Conversions::deg2rad(v).transpose()<<std::endl;
+    //std::cout<<Capybara::Conversions::deg2rad(v).transpose()<<std::endl;
 
     auto lim = Capybara::CVectorXd({1,2,3,4,5});
 
-    std::cout<<lim.transpose()<<std::endl;
+    //std::cout<<lim.transpose()<<std::endl;
     auto M = Capybara::CMatrixXd({
                                  {1,2,3,4},
                                  {4,5,6,7},
                                  {8,9,10,11}
                                 });
-    auto [H, f] = Capybara::Numpy::symmetric_and_linear_component(M, 0.001, 2, VectorXd::Zero(4));
-    std::cout<<H<<std::endl;
-    std::cout<<f<<std::endl;
+    auto [H, f] = Capybara::Numpy::symmetric_and_linear_component(M, 0.001, 2, VectorXd::Zero(3));
+    //std::cout<<H<<std::endl;
+    //std::cout<<f<<std::endl;
+
+    //const auto end{std::chrono::steady_clock::now()};
+    //const std::chrono::duration<double> elapsed_seconds{end - start};
+    //double ti = elapsed_seconds.count();
+    std::cout<<clock.toc(Capybara::Cronos::SCALE::SECONDS)<<std::endl;
+
 
 }
