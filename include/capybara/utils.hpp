@@ -28,7 +28,7 @@
 #else
 #include <eigen3/Eigen/Dense>
 #endif
-
+#include <thread>
 
 using namespace Eigen;
 
@@ -36,6 +36,8 @@ namespace Capybara {
 
 VectorXd CVectorXd(const std::vector<double>& vec);
 MatrixXd CMatrixXd(const std::vector<std::vector<double>>& mat);
+
+void delay(const int& milliseconds);
 
 }
 
