@@ -37,7 +37,9 @@ namespace Capybara {
 VectorXd CVectorXd(const std::vector<double>& vec);
 MatrixXd CMatrixXd(const std::vector<std::vector<double>>& mat);
 
-void delay(const int& milliseconds);
+void millidelay(const int& milliseconds);
+void microdelay(const int& microseconds);
+void delay(const int& seconds);
 
 }
 

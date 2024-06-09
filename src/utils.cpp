@@ -59,7 +59,17 @@ MatrixXd Capybara::CMatrixXd(const std::vector<std::vector<double>>& mat)
     return output;
 }
 
-void Capybara::delay(const int &milliseconds)
+void Capybara::delay(const int &seconds)
 {
-    std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+    std::this_thread::sleep_for(std::chrono::seconds(seconds));
+}
+
+void Capybara::microdelay(const int &microseconds)
+{
+    std::this_thread::sleep_for(std::chrono::microseconds(microseconds));
+}
+
+void Capybara::millidelay(const int &milliseconds)
+{
+    std::this_thread::sleep_for(std::chrono::microseconds(milliseconds));
 }
