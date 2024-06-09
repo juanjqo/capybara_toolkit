@@ -71,5 +71,5 @@ void Capybara::microdelay(const int &microseconds)
 
 void Capybara::millidelay(const int &milliseconds)
 {
-    std::this_thread::sleep_for(std::chrono::microseconds(milliseconds));
+    std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
 }
