@@ -44,6 +44,7 @@ int main()
     //double ti = elapsed_seconds.count();
     std::cout<<clock.toc()<<std::endl;
     clock.show_elapsed_time(Capybara::Cronos::SCALE::MICROSECONDS);
+    clock.show_elapsed_hhmmss_time();
 
 
 }
