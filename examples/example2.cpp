@@ -42,7 +42,8 @@ int main()
     //const auto end{std::chrono::steady_clock::now()};
     //const std::chrono::duration<double> elapsed_seconds{end - start};
     //double ti = elapsed_seconds.count();
-    std::cout<<clock.toc(Capybara::Cronos::SCALE::SECONDS)<<std::endl;
+    std::cout<<clock.toc()<<std::endl;
+    clock.show_elapsed_time(Capybara::Cronos::SCALE::MICROSECONDS);
 
 
 }
