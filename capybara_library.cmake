@@ -18,6 +18,10 @@ if(APPLE)
         /opt/homebrew/include
         /opt/homebrew/include/eigen3)
     ADD_COMPILE_OPTIONS(-Werror=return-type -Wall -Wextra -Wmissing-declarations -Wredundant-decls -Woverloaded-virtual)
+    LINK_DIRECTORIES(
+        /usr/local/lib/
+        /opt/homebrew/lib/
+        )
 endif()
 
 set(CAPYBARA_HEADERS
@@ -41,6 +45,31 @@ set(CAPYBARA_SOURCES
     ${CAPYBARA_DIR}/src/cronos.cpp
 )
 
-add_library(capybara ${CAPYBARA_HEADERS} ${CAPYBARA_SOURCES})
+
+if(NOT USE_CAPY_DQROBOTICS)
+    message(AUTHOR_WARNING "Environment variable USE_CAPY_DQROBOTICS is not set.
+        Functionalities of Capybara and DQ robotics not enabled.")
+    set(CAPY_DQROBOTICS_SOURCES)
+    set(CAPY_DQROBOTICS_HEADERS)
+else()
+    message(NOTICE "Environment variable USE_CAPY_DQROBOTICS is set.
+        Functionalities of Capybara and DQ robotics enabled!")
+    set(CAPY_DQROBOTICS_HEADERS
+        ${CAPYBARA_DIR}/include/capybara/motions.hpp
+    )
+    set(CAPY_DQROBOTICS_SOURCES
+        ${CAPYBARA_DIR}/src/motions.cpp
+    )
+endif()
+
+add_library(capybara ${CAPYBARA_HEADERS}
+                     ${CAPYBARA_SOURCES}
+                     ${CAPY_DQROBOTICS_SOURCES}
+                     ${CAPY_DQROBOTICS_HEADERS}
+                 )
+#if(USE_CAPY_DQROBOTICS)
+#    target_link_libraries(capybara dqrobotics)
+#endif()
 include_directories(${CAPYBARA_DIR}/include/)
+
 

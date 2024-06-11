@@ -7,6 +7,9 @@
 #include <eigen3/Eigen/Dense>
 #endif
 
+#include <dqrobotics/DQ.h>
+#include <dqcapybara.hpp>
+
 using namespace Eigen;
 
 int main()
@@ -36,6 +39,8 @@ int main()
                                  {8,9,10,11}
                                 });
     auto [H, f] = Capybara::Numpy::symmetric_and_linear_component(M, 0.001, 2, VectorXd::Zero(3));
+
+    Capybara::rot(0.5, DQ_robotics::k_);
     //std::cout<<H<<std::endl;
     //std::cout<<f<<std::endl;
 
