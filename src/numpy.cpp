@@ -217,4 +217,16 @@ std::tuple<MatrixXd, VectorXd> Numpy::symmetric_and_linear_component(const Matri
     return {Capybara::Numpy::symmetric(J, damping), gain*J.transpose()*task_error};
 }
 
+/**
+ * @brief Capybara::round
+ * @param value
+ * @param digits
+ * @return
+ */
+double Capybara::Numpy::round(const double &value, const int &digits)
+{
+    double factor = std::pow(10, digits);
+    return double(std::round(value*factor)/factor);
+}
+
 }

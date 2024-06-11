@@ -1,6 +1,6 @@
 #include <iostream>
 #include <capybara.hpp>
-
+#include <iomanip>
 #ifdef _WIN32
 #include <Eigen/Dense>
 #else
@@ -42,6 +42,10 @@ int main()
     //const auto end{std::chrono::steady_clock::now()};
     //const std::chrono::duration<double> elapsed_seconds{end - start};
     //double ti = elapsed_seconds.count();
+    using np = Capybara::Numpy;
+    double num = 0.0000345;
+    std::setprecision(10);
+    std::cout<<std::format("number: {}, rounded: {}",num, np::round(num, 6))<<std::endl;
     std::cout<<clock.toc()<<std::endl;
     clock.show_elapsed_time(Capybara::Cronos::SCALE::MICROSECONDS);
     clock.show_elapsed_hhmmss_time();

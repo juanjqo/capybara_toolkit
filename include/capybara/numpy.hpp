@@ -52,6 +52,8 @@ public:
                                    const double& damping,
                                    const double& gain,
                                    const VectorXd& task_error);
+
+    static double round(const double& value, const int& digits);
 };
 }
 
