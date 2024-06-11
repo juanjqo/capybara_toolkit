@@ -226,7 +226,7 @@ std::tuple<MatrixXd, VectorXd> Numpy::symmetric_and_linear_component(const Matri
 double Capybara::Numpy::round(const double &value, const int &digits)
 {
     double factor = std::pow(10, digits);
-    return double(std::round(value*factor)/factor);
+    return static_cast<double>(std::round(value*factor)/factor);
 }
 
 }
