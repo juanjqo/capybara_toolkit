@@ -120,6 +120,37 @@ bool Checkers::check_constraint_sizes(const MatrixXd &A, const VectorXd &b, cons
     return Capybara::SUCCESS;
 }
 
+/*
+//template<typename T, typename U>
+bool Checkers::check_equal_sizes(const auto& v1, const auto& v2, const MODE &mode)
+{
+    std::size_t s1 = static_cast<std::size_t>(v1.size());
+    std::size_t s2 = static_cast<std::size_t>(v2.size());
+    if (s1 != s2)
+    {
+        if (mode == Checkers::MODE::PANIC)
+            throw std::runtime_error("Panic with Capybara::Checkers::check_equal_sizes(v1, v2). Both containers have diferent sizes. ");
+        return FAIL;
+    }
+    return SUCCESS;
+}
+*/
+/*
+//template<typename T, typename U, typename V>
+bool Checkers::check_equal_sizes(const auto &v1,
+                                 const auto &v2,
+                                 const auto &v3, const MODE &mode)
+{
+    bool s1 = Checkers::check_equal_sizes(v1, v2, mode);
+    bool s2 = Checkers::check_equal_sizes(v2, v3, mode);
+    if (s1 != s2)
+    {
+        return FAIL;
+    }
+    return SUCCESS;
+}
+*/
+
 
 
 

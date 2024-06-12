@@ -1,3 +1,3 @@
 #pragma once
 
-#include <capybara/motions.hpp>
+#include <dqcapybara/motions.hpp>

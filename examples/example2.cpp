@@ -50,6 +50,11 @@ int main()
     using np = Capybara::Numpy;
     double num = 0.0000345;
     std::setprecision(10);
+
+    auto x = Capybara::rotz(90);
+    std::cout<<x<<std::endl;
+
+
     std::cout<<std::format("number: {}, rounded: {}",num, np::round(num, 6))<<std::endl;
     std::cout<<clock.toc()<<std::endl;
     clock.show_elapsed_time(Capybara::Cronos::SCALE::MICROSECONDS);
