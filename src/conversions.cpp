@@ -58,12 +58,8 @@ VectorXd Conversions::std_vector_vectorxd_to_vectorxd(std::vector<VectorXd> &std
  */
 VectorXd Conversions::double2vector(const double &value, const int &size)
 {
-    VectorXd output = VectorXd(size);
-    for (auto i = 0; i<size; i++)
-    {
-        output(i) = value;
-    }
-    return output;
+    std::vector<double> aux(size, value);
+    return std_vector_double_to_vectorxd(aux);
 }
 
 /**

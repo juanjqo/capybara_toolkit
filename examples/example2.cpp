@@ -10,6 +10,7 @@
 #include <dqrobotics/DQ.h>
 #include <dqcapybara.hpp>
 //#include <print> C++23
+//#include <expected> C++23
 
 using namespace Eigen;
 
@@ -29,6 +30,7 @@ int main()
     cm.add_inequality_constraint(A,b);
     auto [A_, b_] = cm.get_inequality_constraints();
     auto v = Capybara::Conversions::double2vector(180, 10);
+    std::cout<<v<<std::endl;
     //std::cout<<Capybara::Conversions::deg2rad(v).transpose()<<std::endl;
 
     auto lim = Capybara::CVectorXd({1,2,3,4,5});
@@ -62,6 +64,8 @@ int main()
     std::cout<<clock.toc()<<std::endl;
     clock.show_elapsed_time(Capybara::Cronos::SCALE::MICROSECONDS);
     clock.show_elapsed_hhmmss_time();
+
+
 
 
 }

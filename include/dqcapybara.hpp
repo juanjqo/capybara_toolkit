@@ -1,3 +1,3 @@
 #pragma once
 
-#include <dqcapybara/motions.hpp>
+#include <dqcapybara/rigid_motions.hpp>

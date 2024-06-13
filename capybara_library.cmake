@@ -55,10 +55,10 @@ else()
     message(NOTICE "Environment variable USE_CAPY_DQROBOTICS is set.
         Functionalities of Capybara and DQ robotics enabled!")
     set(CAPY_DQROBOTICS_HEADERS
-        ${CAPYBARA_DIR}/include/dqcapybara/motions.hpp
+        ${CAPYBARA_DIR}/include/dqcapybara/rigid_motions.hpp
     )
     set(CAPY_DQROBOTICS_SOURCES
-        ${CAPYBARA_DIR}/src/motions.cpp
+        ${CAPYBARA_DIR}/src/rigid_motions.cpp
     )
 endif()
 
