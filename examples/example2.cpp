@@ -9,6 +9,7 @@
 
 #include <dqrobotics/DQ.h>
 #include <dqcapybara.hpp>
+//#include <print> C++23
 
 using namespace Eigen;
 
@@ -53,6 +54,8 @@ int main()
 
     auto x = Capybara::rotz(90);
     std::cout<<x<<std::endl;
+
+    //std::println("number: {}, rounded: {}",num, np::round(num, 6)); C++23
 
 
     std::cout<<std::format("number: {}, rounded: {}",num, np::round(num, 6))<<std::endl;
