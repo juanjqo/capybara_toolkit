@@ -10,6 +10,7 @@ A library for C++20 with an incomplete collection of useful classes and function
 #### Include capybara_toolkit via CMake 
 
 ```Cmake
+set(USE_CAPY_DQROBOTICS false) #optional
 include(FetchContent)
 FetchContent_Declare(capybara
     GIT_REPOSITORY https://github.com/juanjqo/capybara_toolkit
