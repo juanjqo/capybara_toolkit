@@ -39,5 +39,7 @@ int main()
 
     auto v3 = Capybara::Numpy::vstack(v1, v2);
     std::cout<<"v3: "<<v3<<std::endl;
+
+    Capybara::show_vector(names);
     return 0;
 }

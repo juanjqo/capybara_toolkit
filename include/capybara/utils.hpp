@@ -29,6 +29,7 @@
 #include <eigen3/Eigen/Dense>
 #endif
 #include <thread>
+#include <iostream>
 
 using namespace Eigen;
 
@@ -42,7 +43,19 @@ void microdelay(const int& microseconds);
 void delay(const int& seconds);
 
 
+void show_vector(const auto& vector)
+{
+    std::cout<<"[";
+    for (size_t i=0; i<vector.size();i++)
+    {
+        if (i!=vector.size()-1)
+            std::cout<<vector.at(i)<<", ";
+        if (i==vector.size()-1)
+            std::cout<<vector.at(i)<<"]"<<std::endl;
 
+    }
+
+}
 
 }
 
