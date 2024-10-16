@@ -40,6 +40,10 @@ int main()
     auto v3 = Capybara::Numpy::vstack(v1, v2);
     std::cout<<"v3: "<<v3<<std::endl;
 
-    Capybara::show_vector(names);
+
+
+
+    std::vector<double> myvec = {1,2,3,4};
+    Capybara::show_vector(myvec);
     return 0;
 }

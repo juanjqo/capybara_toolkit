@@ -23,6 +23,7 @@
 
 #pragma once
 #include <capybara/conversions.hpp>
+#include <capybara/checkers.hpp>
 #ifdef _WIN32
 #include <Eigen/Dense>
 #else
@@ -45,14 +46,20 @@ void delay(const int& seconds);
 
 void show_vector(const auto& vector)
 {
-    std::cout<<"[";
-    for (size_t i=0; i<vector.size();i++)
+    if (vector.size() != 0)
     {
-        if (i!=vector.size()-1)
-            std::cout<<vector.at(i)<<", ";
-        if (i==vector.size()-1)
-            std::cout<<vector.at(i)<<"]"<<std::endl;
+        std::string str = "";
+        if (Capybara::Checkers::is_string(vector.at(0)))
+            str = "\"";
+        std::cout<<"[";
+        for (size_t i=0; i<vector.size();i++)
+        {
+            if (i!=vector.size()-1)
+                std::cout<<str<<vector.at(i)<<str<<", ";
+            if (i==vector.size()-1)
+                std::cout<<str<<vector.at(i)<<str<<"]"<<std::endl;
 
+        }
     }
 
 }
