@@ -53,9 +53,15 @@ public:
                                        const double& optimization_vector_size,
                                        const MODE& mode = Checkers::MODE::PANIC);
 
+    /**
+     * @brief is_string checks if the input is a std::string
+     * @param input
+     * @return True if the input is a std::string. False otherwise.
+     */
     static bool is_string(const auto& input){
         return typeid(input) == typeid(std::string(""));
     }
+
 
     //template<typename T> // For old C++ versions
     static bool check_equal_elements(const auto& vector,

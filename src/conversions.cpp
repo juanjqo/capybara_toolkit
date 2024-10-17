@@ -26,9 +26,9 @@
 namespace Capybara {
 
 /**
- * @brief Capybara::Conversions::std_vector_double_to_vectorxd
+ * @brief Capybara::Conversions::std_vector_double_to_vectorxd converts a vector to an Eigen vector
  * @param std_vector
- * @return
+ * @return The desired Eigen vector.
  */
 Eigen::VectorXd Capybara::Conversions::std_vector_double_to_vectorxd(std::vector<double> &std_vector)
 {
@@ -36,7 +36,7 @@ Eigen::VectorXd Capybara::Conversions::std_vector_double_to_vectorxd(std::vector
 }
 
 /**
- * @brief Conversions::std_vector_vectorxd_to_vectorxd
+ * @brief Conversions::std_vector_vectorxd_to_vectorxd converts a vector of vectors to an Eigen vector
  * @param std_vectorxd
  * @return
  */
@@ -51,10 +51,11 @@ VectorXd Conversions::std_vector_vectorxd_to_vectorxd(std::vector<VectorXd> &std
 }
 
 /**
- * @brief Conversions::double2vector
- * @param value
- * @param size
- * @return
+ * @brief Conversions::double2vector creates a vector of the specified size with all their elements
+ *                                   initialized in a specific value.
+ * @param value The value to initialize all vector elements.
+ * @param size The desired size of the vector
+ * @return The desired Eigen vector.
  */
 VectorXd Conversions::double2vector(const double &value, const int &size)
 {
@@ -63,9 +64,9 @@ VectorXd Conversions::double2vector(const double &value, const int &size)
 }
 
 /**
- * @brief Conversions::rad2deg
- * @param rad
- * @return
+ * @brief Conversions::rad2deg converts radians to degrees.
+ * @param rad The radians to be converted to degrees
+ * @return The desired degrees
  */
 double Conversions::rad2deg(const double &rad)
 {
@@ -73,9 +74,9 @@ double Conversions::rad2deg(const double &rad)
 }
 
 /**
- * @brief Conversions::rad2deg
- * @param rad
- * @return
+ * @brief Conversions::rad2deg converts an Eigen vector of radians to an Eigen vector containing degrees.
+ * @param rad The input Eigen vector that containts the radians
+ * @return The desired Eigen vector of degrees
  */
 VectorXd Conversions::rad2deg(const VectorXd &rad)
 {
@@ -89,9 +90,9 @@ VectorXd Conversions::rad2deg(const VectorXd &rad)
 }
 
 /**
- * @brief Conversions::deg2rad
- * @param deg
- * @return
+ * @brief Conversions::deg2rad converts degrees to radians.
+ * @param deg The degrees to be converted to radians.
+ * @return The desired radians
  */
 double Conversions::deg2rad(const double &deg)
 {
@@ -99,9 +100,9 @@ double Conversions::deg2rad(const double &deg)
 }
 
 /**
- * @brief Conversions::deg2rad
- * @param deg
- * @return
+ * @brief Conversions::deg2rad converts an Eigen vector of degrees to an Eigen vector containing radians.
+ * @param deg The input Eigen vector that contatins the degrees
+ * @return The desired Eigen vector of radians
  */
 VectorXd Conversions::deg2rad(const VectorXd &deg)
 {
