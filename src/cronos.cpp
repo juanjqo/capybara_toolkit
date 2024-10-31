@@ -18,6 +18,9 @@ double Cronos::_get_inverse_scale_factor(const SCALE &scale)
     case SCALE::NANOSECONDS:
         fmt_ = "ns";
         return 1e9;
+    default: // This line is required in GCC compiler
+        throw std::runtime_error("Wrong arguments.");
+        break;
     }
 }
 
