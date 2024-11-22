@@ -62,10 +62,27 @@ else()
     )
 endif()
 
+
+if (NOT USE_CAPYROBOT_CONSTRAINT_MANAGER)
+    message(AUTHOR_WARNING "Environment variable USE_CAPYROBOT_CONSTRAINT_MANAGER is not set.
+        Functionalities of capyrobot-constraint-manager not enabled!")
+    set(CAPYROBOT_CONSTRAINT_MANAGER_SOURCES)
+    set(CAPYROBOT_CONSTRAINT_MANAGER_HEADERS)
+else()
+    set(CAPYROBOT_CONSTRAINT_MANAGER_SOURCES
+        ${CAPYBARA_DIR}/include/capyrobot_constraint_manager.hpp
+    )
+    set(CAPYROBOT_CONSTRAINT_MANAGER_HEADERS
+        ${CAPYBARA_DIR}/src/vfi_manager.cpp
+    )
+endif()
+
 add_library(capybara ${CAPYBARA_HEADERS}
                      ${CAPYBARA_SOURCES}
                      ${CAPY_DQROBOTICS_SOURCES}
                      ${CAPY_DQROBOTICS_HEADERS}
+                     ${CAPYROBOT_CONSTRAINT_MANAGER_HEADERS}
+                     ${CAPYROBOT_CONSTRAINT_MANAGER_SOURCES}
                  )
 #if(USE_CAPY_DQROBOTICS)
 #    target_link_libraries(capybara dqrobotics)
