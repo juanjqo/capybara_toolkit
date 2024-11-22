@@ -43,8 +43,8 @@ void millidelay(const int& milliseconds);
 void microdelay(const int& microseconds);
 void delay(const int& seconds);
 
-
-void show_vector(const auto& vector)
+template<typename T>
+void show_vector(const T& vector)
 {
     if (vector.size() != 0)
     {

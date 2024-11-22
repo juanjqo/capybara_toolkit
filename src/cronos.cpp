@@ -38,7 +38,7 @@ double Cronos::toc(const SCALE &scale)
     const auto end{std::chrono::steady_clock::now()};
     //const std::chrono::duration<double> elapsed_seconds{end - initial_time_};
     elapsed_seconds_ = std::chrono::duration<double>{end - initial_time_};
-    elapsed_hhmmss_time_ = std::chrono::hh_mm_ss{elapsed_seconds_};
+    //elapsed_hhmmss_time_ = std::chrono::hh_mm_ss{elapsed_seconds_};
     elapsed_time_ = elapsed_seconds_.count();
     return get_elapsed_time(scale);
 
@@ -51,12 +51,14 @@ double Cronos::get_elapsed_time(const SCALE &scale)
 
 void Cronos::show_elapsed_time(const SCALE &scale)
 {
-    std::cout<<std::format("Elapsed time: {} ({})", get_elapsed_time(scale), fmt_)<<std::endl;
+    std::cout<<"Elapsed time: "<<get_elapsed_time(scale)<<"() "<<fmt_<<std::endl;
 }
 
+/*
 void Cronos::show_elapsed_hhmmss_time()
 {
-    std::cout<<std::format("Elapsed time: {}", elapsed_hhmmss_time_)<<std::endl;
+    std::cout<<"Elapsed time: "<<elapsed_hhmmss_time_<<std::endl;
 }
+*/
 // std::chrono::hh_mm_ss<std::chrono::seconds> tod{std::chrono::seconds(secs)};
 }
