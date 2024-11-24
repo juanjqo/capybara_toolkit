@@ -56,9 +56,11 @@ else()
         Functionalities of Capybara and DQ robotics enabled!")
     set(CAPY_DQROBOTICS_HEADERS
         ${CAPYBARA_DIR}/include/dqcapybara/rigid_motions.hpp
+        ${CAPYBARA_DIR}/include/dqcapybara/custom_controllers.hpp
     )
     set(CAPY_DQROBOTICS_SOURCES
         ${CAPYBARA_DIR}/src/rigid_motions.cpp
+        ${CAPYBARA_DIR}/src/custom_controllers.cpp
     )
 endif()
 
