@@ -27,6 +27,7 @@
 #include <capybara.hpp>
 #include <dqcapybara.hpp>
 #include <dqrobotics/solvers/DQ_QuadraticProgrammingSolver.h>
+#include <memory>
 
 using namespace  DQ_robotics;
 using namespace Eigen;
