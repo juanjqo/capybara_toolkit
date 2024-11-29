@@ -65,6 +65,13 @@ int main()
     clock.show_elapsed_time(Capybara::Cronos::SCALE::MICROSECONDS);
     //clock.show_elapsed_hhmmss_time();
 
+    auto dl = Capybara::DataLogger(Capybara::DataLogger::TYPE::VECTORXD);
+    dl.add_data(lim);
+    dl.add_data(2*lim);
+    dl.add_data(-lim);
+    dl.show_data();
+    dl.save_data("dl_data");
+
 
 
 

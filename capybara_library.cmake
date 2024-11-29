@@ -33,6 +33,7 @@ set(CAPYBARA_HEADERS
     ${CAPYBARA_DIR}/include/capybara/capytypes.hpp
     ${CAPYBARA_DIR}/include/capybara/utils.hpp
     ${CAPYBARA_DIR}/include/capybara/cronos.hpp
+    ${CAPYBARA_DIR}/include/capybara/data_logger.hpp
 )
 
 set(CAPYBARA_SOURCES
@@ -43,6 +44,7 @@ set(CAPYBARA_SOURCES
     ${CAPYBARA_DIR}/src/constraints_manager.cpp
     ${CAPYBARA_DIR}/src/utils.cpp
     ${CAPYBARA_DIR}/src/cronos.cpp
+    ${CAPYBARA_DIR}/src/data_logger.cpp
 )
 
 

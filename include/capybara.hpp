@@ -8,3 +8,4 @@
 #include <capybara/capytypes.hpp>
 #include <capybara/utils.hpp>
 #include <capybara/cronos.hpp>
+#include <capybara/data_logger.hpp>

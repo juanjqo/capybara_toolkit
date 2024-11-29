@@ -24,28 +24,39 @@
 #pragma once
 #include <capybara/capytypes.hpp>
 #include <capybara/numpy.hpp>
+#include <capybara/conversions.hpp>
 
 #ifdef _WIN32
 #include <Eigen/Dense>
 #else
 #include <eigen3/Eigen/Dense>
 #endif
-
+#include <fstream>
+#include <iostream>
 using namespace Eigen;
 
 namespace Capybara {
-
-class Conversions
+class DataLogger
 {
 public:
-    static VectorXd std_vector_double_to_vectorxd(std::vector<double> &std_vector);
-    static VectorXd vectorxd_to_std_vector_double(std::vector<double> &std_vector);
-    static VectorXd std_vector_vectorxd_to_vectorxd(std::vector<VectorXd>& std_vectorxd);
-    static VectorXd double2vector(const double& value, const int& size);
-    static double   rad2deg(const double& rad);
-    static VectorXd rad2deg(const VectorXd& rad);
-    static double   deg2rad(const double& deg);
-    static VectorXd deg2rad(const VectorXd& deg);
+    enum class TYPE{
+        VECTORXD
+    };
+private:
+    TYPE type_;
+    std::ofstream data_logger_;
+    bool first_call_{true};
+    MatrixXd matrix_data_;
+    int vector_size_;
+    int i_{0};
+    //list_vel_ref.open("list_vel_ref.csv");
+public:
+    DataLogger(const TYPE& type);
+
+
+    void add_data(const VectorXd& data);
+    void save_data(const std::string& filename);
+    void show_data();
 };
 }
 
