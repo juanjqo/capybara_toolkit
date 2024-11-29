@@ -60,10 +60,10 @@ int main()
     //std::println("number: {}, rounded: {}",num, np::round(num, 6)); C++23
 
 
-    std::cout<<std::format("number: {}, rounded: {}",num, np::round(num, 6))<<std::endl;
+    std::cout<<"number: "<<num<<" rounded: "<<np::round(num, 6)<<std::endl;
     std::cout<<clock.toc()<<std::endl;
     clock.show_elapsed_time(Capybara::Cronos::SCALE::MICROSECONDS);
-    clock.show_elapsed_hhmmss_time();
+    //clock.show_elapsed_hhmmss_time();
 
 
 

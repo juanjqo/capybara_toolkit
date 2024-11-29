@@ -58,13 +58,14 @@ public:
      * @param input
      * @return True if the input is a std::string. False otherwise.
      */
-    static bool is_string(const auto& input){
+    template<typename T>
+    static bool is_string(const T& input){
         return typeid(input) == typeid(std::string(""));
     }
 
 
-    //template<typename T> // For old C++ versions
-    static bool check_equal_elements(const auto& vector,
+    template<typename T>
+    static bool check_equal_elements(const T& vector,
                                      const MODE& mode = Checkers::MODE::PANIC)
     {
         if (std::all_of(vector.cbegin(), vector.cend(), [vector](int i) { return i == vector.at(0); }))
@@ -79,9 +80,9 @@ public:
         }
     }
 
-    //template<typename T, typename U>  // For old C++ versions
-    static bool check_equal_sizes(const auto &v1,
-                                  const auto &v2,
+    template<typename T, typename U>
+    static bool check_equal_sizes(const T &v1,
+                                  const U &v2,
                                   const MODE& mode = Checkers::MODE::PANIC)
     {
         std::size_t s1 = static_cast<std::size_t>(v1.size());
@@ -96,10 +97,10 @@ public:
     }
 
 
-    //template<typename T, typename U, typename V> // For old C++ versions
-    static bool check_equal_sizes(const auto &v1,
-                                  const auto &v2,
-                                  const auto &v3,
+    template<typename T, typename U, typename V>
+    static bool check_equal_sizes(const T &v1,
+                                  const U &v2,
+                                  const V &v3,
                                   const MODE& mode = Checkers::MODE::PANIC)
     {
         bool s1 = Checkers::check_equal_sizes(v1, v2, mode);

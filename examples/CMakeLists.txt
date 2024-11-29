@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(USE_CAPY_DQROBOTICS true)
+set(USE_CAPYROBOT_CONSTRAINT_MANAGER true)
 set (CAPYBARA_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../capybara_toolkit/)
 include(${CAPYBARA_DIR}/capybara_library.cmake)
 
