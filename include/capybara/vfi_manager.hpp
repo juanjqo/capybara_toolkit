@@ -20,9 +20,9 @@ class VFI_manager
 public:
     enum class VFI_TYPE{
         RPOINT_TO_POINT,
-        //RPOINT_TO_LINE,
-        //RPOINT_TO_PLANE,
-        //RLINE_TO_LINE_ANGLE,
+        RPOINT_TO_PLANE,
+        RPOINT_TO_LINE,
+        RLINE_TO_LINE_ANGLE,
         //RLINE_TO_LINE,
         //RLINE_TO_POINT
     };
