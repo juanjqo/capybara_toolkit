@@ -6,7 +6,7 @@ namespace Capybara {
 VFI_manager::VFI_manager(const int &dim_configuration, const LEVEL &level)
     :dim_configuration_(dim_configuration),level_(level)
 {
-    constraint_manager_ = std::make_unique<Capybara::ConstraintsManager>(dim_configuration_);
+    constraint_manager_ = std::make_shared<Capybara::ConstraintsManager>(dim_configuration_);
 }
 
 void VFI_manager::_add_vfi_constraint(const MatrixXd &Jd, const VectorXd &b, const DIRECTION &direction)
@@ -16,6 +16,9 @@ void VFI_manager::_add_vfi_constraint(const MatrixXd &Jd, const VectorXd &b, con
     else
         constraint_manager_->add_inequality_constraint(Jd, -b);
 }
+
+
+
 
 
 void VFI_manager::add_vfi_constraint(const DIRECTION &direction,
@@ -100,7 +103,18 @@ void VFI_manager::add_vfi_constraint(const DIRECTION &direction,
         _add_vfi_constraint(Jfphi, b, direction);
         break;
     }
-}
+    case VFI_TYPE::RLINE_TO_LINE:
+    {
+        throw std::runtime_error("VFI_TYPE::RLINE_TO_LINE is unsupported");
+        break;
+    }
+
+    case VFI_TYPE::RLINE_TO_POINT:
+    {
+        throw std::runtime_error("VFI_TYPE::RLINE_TO_POINT is unsupported");
+        break;
+    }
+    }
 }
 
 std::tuple<MatrixXd, VectorXd> VFI_manager::get_vfi_constraints()

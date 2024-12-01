@@ -16,7 +16,9 @@ if(APPLE)
         /usr/local/include/eigen3
         # Most recent versions of brew install here
         /opt/homebrew/include
-        /opt/homebrew/include/eigen3)
+        /opt/homebrew/include/eigen3
+        /opt/homebrew/include/yaml-cpp
+    )
     ADD_COMPILE_OPTIONS(-Werror=return-type -Wall -Wextra -Wmissing-declarations -Wredundant-decls -Woverloaded-virtual)
     LINK_DIRECTORIES(
         /usr/local/lib/
@@ -70,17 +72,32 @@ endif()
 if (NOT USE_EXPERIMENTAL_FEATURES)
     message(AUTHOR_WARNING "Environment variable USE_EXPERIMENTAL_FEATURES is not set.
         Experimental functionalities of capybara not enabled!")
+
+
+
     set(CAPYROBOT_CONSTRAINT_MANAGER_SOURCES)
     set(CAPYROBOT_CONSTRAINT_MANAGER_HEADERS)
+
+
+
+    set(YAML_CPP)
+
 else()
     set(CAPYROBOT_CONSTRAINT_MANAGER_SOURCES
         ${CAPYBARA_DIR}/include/capybara/experimental/vfi_manager.hpp
+        ${CAPYBARA_DIR}/include/capybara/experimental/vfi_framework.hpp
         ${CAPYBARA_DIR}/include/capybara/experimental/robot_constraints_manager.hpp
+
     )
     set(CAPYROBOT_CONSTRAINT_MANAGER_HEADERS
         ${CAPYBARA_DIR}/src/vfi_manager.cpp
+        ${CAPYBARA_DIR}/src/vfi_framework.cpp
         ${CAPYBARA_DIR}/src/robot_constraints_manager.cpp
     )
+
+set(YAML_CPP yaml-cpp)
+
+
 endif()
 
 add_library(capybara ${CAPYBARA_HEADERS}
@@ -90,6 +107,7 @@ add_library(capybara ${CAPYBARA_HEADERS}
                      ${CAPYROBOT_CONSTRAINT_MANAGER_HEADERS}
                      ${CAPYROBOT_CONSTRAINT_MANAGER_SOURCES}
                  )
+target_link_libraries(capybara ${YAML_CPP})
 #if(USE_CAPY_DQROBOTICS)
 #    target_link_libraries(capybara dqrobotics)
 #endif()

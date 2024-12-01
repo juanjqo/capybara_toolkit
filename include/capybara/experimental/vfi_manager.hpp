@@ -1,3 +1,26 @@
+/*
+#    Copyright (c) 2024 Juan Jose Quiroz Omana
+#
+#    Capybara_toolkit is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Lesser General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    Capybara_toolkit is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Lesser General Public License for more details.
+#
+#    You should have received a copy of the GNU Lesser General Public License
+#    along with Capybara_toolkit.  If not, see <https://www.gnu.org/licenses/>.
+#
+# ################################################################
+#
+#   Author: Juan Jose Quiroz Omana, (email: juanjqogm@gmail.com)
+#
+# ################################################################
+*/
+
 #pragma once
 #ifdef _WIN32
 #include <Eigen/Dense>
@@ -9,45 +32,27 @@
 #include <dqrobotics/robot_modeling/DQ_Kinematics.h>
 #include <dqrobotics/utils/DQ_Geometry.h>
 #include <capybara.hpp>
+#include <capybara/experimental/vfi_framework.hpp>
 
 using namespace Eigen;
 using namespace DQ_robotics;
 
 namespace Capybara {
 
-class VFI_manager
+class VFI_manager: public VFI_Framework
 {
-public:
-    enum class VFI_TYPE{
-        RPOINT_TO_POINT,
-        RPOINT_TO_PLANE,
-        RPOINT_TO_LINE,
-        RLINE_TO_LINE_ANGLE,
-        //RLINE_TO_LINE,
-        //RLINE_TO_POINT
-    };
-    enum class DIRECTION{
-        KEEP_ROBOT_OUTSIDE,
-        KEEP_ROBOT_INSIDE
-    };
-    enum class PRIMITIVE{
-        POINT,
-        LINE,
-        PLANE,
-        LINE_ANGLE
-    };
-    enum class LEVEL{
-        VELOCITIES,
-        ACCELERATIONS
-    };
+
 
 protected:
     int dim_configuration_;
     LEVEL level_;
-    std::unique_ptr<Capybara::ConstraintsManager> constraint_manager_;
+    std::shared_ptr<Capybara::ConstraintsManager> constraint_manager_;
     void _add_vfi_constraint(const MatrixXd& Jd,
                              const VectorXd& b,
                              const DIRECTION& direction);
+
+
+
 public:
     VFI_manager()=delete;
     VFI_manager(const int& dim_configuration,
@@ -65,6 +70,9 @@ public:
                             const DQ& workspace_derivative = DQ(0));
 
     //void add_sovfi_constraint();
+
+
+
 
     std::tuple<MatrixXd, VectorXd> get_vfi_constraints();
 

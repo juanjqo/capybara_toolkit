@@ -33,13 +33,14 @@
 #include <dqrobotics/interfaces/coppeliasim/DQ_CoppeliaSimInterfaceZMQExperimental.h>
 #include <dqrobotics/interfaces/coppeliasim/DQ_CoppeliaSimRobotZMQ.h>
 #include <capybara.hpp>
+#include <yaml-cpp/yaml.h>
 
 using namespace Eigen;
 using namespace DQ_robotics;
 
 namespace Capybara {
 
-class RobotConstraintsManager: public VFI_manager
+class RobotConstraintsManager
 {
 protected:
     std::shared_ptr<DQ_CoppeliaSimInterfaceZMQExperimental> vi_;
@@ -47,15 +48,42 @@ protected:
     VFI_manager::LEVEL level_;
     std::shared_ptr<DQ_Kinematics> robot_;
     std::shared_ptr<DQ_CoppeliaSimRobot> coppelia_robot_;
-    std::shared_ptr<Capybara::ConstraintsManager> CM_;
+    std::shared_ptr<Capybara::VFI_manager> VFI_M_;
     double vfi_gain_{0.5};
 
+    VectorXd q_max_;
+    VectorXd q_min_;
+    VectorXd q_min_dot_;
+    VectorXd q_max_dot_;
+
+
+    std::vector<VFI_manager::VFI_TYPE> vfi_type_list_;
+    std::vector<VFI_manager::DIRECTION> direction_list_;
+    std::vector<double> safe_distance_list_;
+    std::vector<int> robot_index_list_;
+    std::vector<int> joint_index_list_;
+    std::vector<DQ> dq_offset_list_;
+    std::vector<DQ> robot_attached_dir_list_;
+    std::vector<DQ> envir_attached_dir_list_;
+    std::vector<DQ> workspace_derivative_list_;
+    std::vector<std::string> cs_entity_environment_list_;
+
+    DQ _get_robot_primitive_offset_from_coppeliasim(const std::string& object_name, const int& robot_index, const int& joint_index);
+    void _initial_settings();
 public:
     RobotConstraintsManager(const std::shared_ptr<DQ_CoppeliaSimInterfaceZMQExperimental>& coppelia_interface,
                             const std::shared_ptr<DQ_Kinematics>& robot,
                             const std::shared_ptr<DQ_CoppeliaSimRobot>& coppelia_robot,
+                            const VectorXd& q_min,
+                            const VectorXd& q_max,
+                            const VectorXd& q_min_dot,
+                            const VectorXd& q_max_dot,
                             const std::string &config_path,
-                            const VFI_manager::LEVEL& level);
+                            const VFI_manager::LEVEL& level = VFI_manager::LEVEL::VELOCITIES);
+
+    std::tuple<MatrixXd, VectorXd> get_inequality_constraints(const VectorXd& q);
+    std::tuple<MatrixXd, VectorXd> get_equality_constraints();
+
 
 };
 
