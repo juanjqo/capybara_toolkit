@@ -32,6 +32,7 @@
 #include <capybara/experimental/vfi_manager.hpp>
 #include <dqrobotics/interfaces/coppeliasim/DQ_CoppeliaSimInterfaceZMQExperimental.h>
 #include <dqrobotics/interfaces/coppeliasim/DQ_CoppeliaSimRobotZMQ.h>
+#include <capybara.hpp>
 
 using namespace Eigen;
 using namespace DQ_robotics;
@@ -41,9 +42,15 @@ namespace Capybara {
 class RobotConstraintsManager: public VFI_manager
 {
 protected:
+    std::shared_ptr<DQ_CoppeliaSimInterfaceZMQExperimental> vi_;
+    std::string config_path_;
+    VFI_manager::LEVEL level_;
+    std::shared_ptr<DQ_Kinematics> robot_;
+    std::shared_ptr<DQ_CoppeliaSimRobot> coppelia_robot_;
+    std::shared_ptr<Capybara::ConstraintsManager> CM_;
+    double vfi_gain_{0.5};
 
 public:
-
     RobotConstraintsManager(const std::shared_ptr<DQ_CoppeliaSimInterfaceZMQExperimental>& coppelia_interface,
                             const std::shared_ptr<DQ_Kinematics>& robot,
                             const std::shared_ptr<DQ_CoppeliaSimRobot>& coppelia_robot,

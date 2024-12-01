@@ -75,7 +75,7 @@ if (NOT USE_EXPERIMENTAL_FEATURES)
 else()
     set(CAPYROBOT_CONSTRAINT_MANAGER_SOURCES
         ${CAPYBARA_DIR}/include/capybara/experimental/vfi_manager.hpp
-        ${CAPYBARA_DIR}/include/capybara/experimental/robot_constraint_manager.hpp
+        ${CAPYBARA_DIR}/include/capybara/experimental/robot_constraints_manager.hpp
     )
     set(CAPYROBOT_CONSTRAINT_MANAGER_HEADERS
         ${CAPYBARA_DIR}/src/vfi_manager.cpp
