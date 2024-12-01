@@ -53,7 +53,7 @@ void RobotConstraintsManager::_initial_settings()
             auto rect = dict["Parameters"];
 
             for(auto pos : rect) {
-                auto raw_vfi_type = pos["vfi_type"].as<std::string>();
+                auto raw_vfi_mode = pos["vfi_mode"].as<std::string>();
                 auto raw_cs_entity_environment = pos["cs_entity_environment"].as<std::string>();
                 auto raw_cs_entity_robot = pos["cs_entity_robot"].as<std::string>() ;
                 auto raw_entity_environment_primitive_type =  pos["entity_environment_primitive_type"].as<std::string>();
@@ -65,8 +65,8 @@ void RobotConstraintsManager::_initial_settings()
                 auto raw_entity_robot_attached_direction = pos["entity_robot_attached_direction"].as<std::string>();
                 auto raw_entity_environment_attached_direction = pos["entity_environment_attached_direction"].as<std::string>();
 
-                /*
-                    std::cout << raw_vfi_type << ",\t"
+
+                    std::cout << raw_vfi_mode << ",\t"
                               << raw_cs_entity_environment  << ",\t"
                               << raw_cs_entity_robot << ",\t"
                               << raw_entity_robot_primitive_type << ",\t"
@@ -76,7 +76,7 @@ void RobotConstraintsManager::_initial_settings()
                               << raw_safe_distance<< ",\t"
                               << raw_direction << ",\t"
                               << raw_entity_robot_attached_direction << ",\t"
-                              << raw_entity_environment_attached_direction << std::endl; */
+                              << raw_entity_environment_attached_direction << std::endl;
 
 
                 vfi_type_list_.     push_back(VFI_Framework::map_strings_to_vfiType(raw_entity_robot_primitive_type,
