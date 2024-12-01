@@ -67,17 +67,19 @@ else()
 endif()
 
 
-if (NOT USE_CAPYROBOT_CONSTRAINT_MANAGER)
-    message(AUTHOR_WARNING "Environment variable USE_CAPYROBOT_CONSTRAINT_MANAGER is not set.
-        Functionalities of capyrobot-constraint-manager not enabled!")
+if (NOT USE_EXPERIMENTAL_FEATURES)
+    message(AUTHOR_WARNING "Environment variable USE_EXPERIMENTAL_FEATURES is not set.
+        Experimental functionalities of capybara not enabled!")
     set(CAPYROBOT_CONSTRAINT_MANAGER_SOURCES)
     set(CAPYROBOT_CONSTRAINT_MANAGER_HEADERS)
 else()
     set(CAPYROBOT_CONSTRAINT_MANAGER_SOURCES
-        ${CAPYBARA_DIR}/include/capyrobot_constraint_manager.hpp
+        ${CAPYBARA_DIR}/include/capybara/experimental/vfi_manager.hpp
+        ${CAPYBARA_DIR}/include/capybara/experimental/robot_constraint_manager.hpp
     )
     set(CAPYROBOT_CONSTRAINT_MANAGER_HEADERS
         ${CAPYBARA_DIR}/src/vfi_manager.cpp
+        ${CAPYBARA_DIR}/src/robot_constraints_manager.cpp
     )
 endif()
 
