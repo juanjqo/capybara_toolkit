@@ -25,7 +25,6 @@
 #include <dqrobotics/DQ.h>
 #include<dqrobotics/robot_modeling/DQ_Kinematics.h>
 #include <capybara.hpp>
-#include <dqcapybara.hpp>
 #include <dqrobotics/solvers/DQ_QuadraticProgrammingSolver.h>
 #include <memory>
 

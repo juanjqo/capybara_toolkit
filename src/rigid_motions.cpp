@@ -22,7 +22,7 @@
 */
 
 #include "capybara/conversions.hpp"
-#include <dqcapybara/rigid_motions.hpp>
+#include <capybara/dqrobotics/rigid_motions.hpp>
 
 
 namespace Capybara {
