@@ -43,10 +43,7 @@ void VFI_manager::add_vfi_constraint(const DIRECTION &direction,
         const double square_d = DQ_Geometry::point_to_point_squared_distance(p, p_);
         const double residual = DQ_Kinematics::point_to_point_residual(p, p_, workspace_derivative);
         const double square_error = square_d- square_safe_distance;
-        //VectorXd b = VectorXd::Zero(1);
-        //b(0)  =  vfi_gain*(square_error) + residual;
         VectorXd b = Capybara::CVectorXd({vfi_gain*(square_error) + residual});
-        //std::cout<<"Distance: "<<sqrt(square_d)<<std::endl;
         _add_vfi_constraint(Jd, b, direction);
         break;
     }

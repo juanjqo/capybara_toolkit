@@ -62,7 +62,7 @@ public:
                             const DQ& robot_attached_direction,
                             const DQ& workspace_pose,
                             const DQ& workspace_attached_direction,
-                            const DQ& workspace_derivative);
+                            const DQ& workspace_derivative = DQ(0));
 
     //void add_sovfi_constraint();
 
