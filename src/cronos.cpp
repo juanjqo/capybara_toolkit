@@ -1,3 +1,4 @@
+
 #include <capybara/cronos.hpp>
 
 namespace Capybara {
@@ -24,8 +25,15 @@ double Cronos::_get_inverse_scale_factor(const SCALE &scale)
     }
 }
 
+/*
 Cronos::Cronos() {
 
+}*/
+
+Cronos::Cronos(const double &frequency)
+{
+    time_per_iteration_in_milliseconds_ = (1/frequency)*1000.0;
+    tic();
 }
 
 void Cronos::tic()
@@ -52,6 +60,20 @@ double Cronos::get_elapsed_time(const SCALE &scale)
 void Cronos::show_elapsed_time(const SCALE &scale)
 {
     std::cout<<"Elapsed time: "<<get_elapsed_time(scale)<<"() "<<fmt_<<std::endl;
+}
+
+void Cronos::sleep()
+{
+    double elapsed_time = toc(SCALE::MILLISECONDS);
+    double diff_time = time_per_iteration_in_milliseconds_-elapsed_time;
+    diff_time = Capybara::Numpy::round(diff_time, 1);
+    int error = diff_time;
+    if (error<=0)
+    {
+       // std::cerr<<"Overrun!"<<std::endl;
+    }else
+        Capybara::millidelay(error);
+    tic();
 }
 
 /*
