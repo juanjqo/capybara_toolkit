@@ -34,6 +34,12 @@ class VFI_Framework
 {
 
 public:
+
+    enum class VFI_MODE{
+        ENVIRONMENT_TO_ROBOT,
+        ROBOT_TO_ROBOT
+    };
+
     enum class VFI_TYPE{
         RPOINT_TO_POINT,
         RPOINT_TO_PLANE,

@@ -57,6 +57,9 @@ protected:
     VectorXd q_max_dot_;
 
 
+    std::vector<VFI_manager::VFI_MODE> vfi_mode_list_;
+
+
     std::vector<VFI_manager::VFI_TYPE> vfi_type_list_;
     std::vector<VFI_manager::DIRECTION> direction_list_;
     std::vector<double> safe_distance_list_;
@@ -68,7 +71,7 @@ protected:
     std::vector<DQ> workspace_derivative_list_;
     std::vector<std::string> cs_entity_environment_list_;
 
-    DQ _get_robot_primitive_offset_from_coppeliasim(const std::string& object_name, const int& robot_index, const int& joint_index);
+    DQ _get_robot_primitive_offset_from_coppeliasim(const std::string& object_name, const int& joint_index);
     void _initial_settings();
 public:
     RobotConstraintsManager(const std::shared_ptr<DQ_CoppeliaSimInterfaceZMQExperimental>& coppelia_interface,

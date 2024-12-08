@@ -15,7 +15,7 @@ RobotConstraintsManager::RobotConstraintsManager(const std::shared_ptr<DQ_Coppel
     _initial_settings();
 }
 
-DQ RobotConstraintsManager::_get_robot_primitive_offset_from_coppeliasim(const std::string &object_name, const int &robot_index, const int &joint_index)
+DQ RobotConstraintsManager::_get_robot_primitive_offset_from_coppeliasim(const std::string &object_name, const int &joint_index)
 {
     DQ x;
     DQ x_offset;
@@ -62,22 +62,21 @@ void RobotConstraintsManager::_initial_settings()
                     auto raw_cs_entity_robot = pos["cs_entity_robot"].as<std::string>() ;
                     auto raw_entity_environment_primitive_type =  pos["entity_environment_primitive_type"].as<std::string>();
                     auto raw_entity_robot_primitive_type = pos["entity_robot_primitive_type"].as<std::string>();
-                    auto raw_robot_index = pos["robot_index"].as<double>();
+                    //auto raw_robot_index = pos["robot_index"].as<double>();
                     auto raw_joint_index =  pos["joint_index"].as<double>();
                     auto raw_safe_distance = pos["safe_distance"].as<double>();
                     auto raw_direction =  pos["direction"].as<std::string>();
                     auto raw_entity_robot_attached_direction = pos["entity_robot_attached_direction"].as<std::string>();
                     auto raw_entity_environment_attached_direction = pos["entity_environment_attached_direction"].as<std::string>();
 
+                    vfi_mode_list_.push_back(VFI_manager::VFI_MODE::ENVIRONMENT_TO_ROBOT);
                     vfi_type_list_.     push_back(VFI_Framework::map_strings_to_vfiType(raw_entity_robot_primitive_type,
-                                                                                   raw_entity_environment_primitive_type));
+                                                                                        raw_entity_environment_primitive_type));
                     direction_list_.    push_back(VFI_Framework::map_string_to_direction(raw_direction));
                     safe_distance_list_.push_back(raw_safe_distance);
-                    robot_index_list_.  push_back(raw_robot_index);
                     joint_index_list_.  push_back(raw_joint_index);
                     dq_offset_list_.    push_back(_get_robot_primitive_offset_from_coppeliasim(raw_cs_entity_robot,
-                                                                                           raw_robot_index,  //raw_robot_index,
-                                                                                           raw_joint_index));
+                                                                                               raw_joint_index));
 
                     robot_attached_dir_list_.push_back(VFI_Framework::map_attached_direction_string_to_dq(raw_entity_robot_attached_direction));
                     envir_attached_dir_list_.push_back(VFI_Framework::map_attached_direction_string_to_dq(raw_entity_environment_attached_direction));
@@ -89,7 +88,6 @@ void RobotConstraintsManager::_initial_settings()
                               << raw_cs_entity_robot << ",\t"
                               << raw_entity_robot_primitive_type << ",\t"
                               << raw_entity_environment_primitive_type << ",\t"
-                              << raw_robot_index << ",\t"
                               << raw_joint_index  << ",\t"
                               << raw_safe_distance<< ",\t"
                               << raw_direction << ",\t"
@@ -103,21 +101,18 @@ void RobotConstraintsManager::_initial_settings()
                     auto raw_entity_one_primitive_type =  pos["entity_one_primitive_type"].as<std::string>();
                     auto raw_entity_two_primitive_type=   pos["entity_two_primitive_type"].as<std::string>();
 
-                    auto raw_robot_index_one = pos["robot_index_one"].as<double>();
-                    auto raw_robot_index_two = pos["robot_index_two"].as<double>();
-
                     auto raw_joint_index_one =  pos["joint_index_one"].as<double>();
                     auto raw_joint_index_two =  pos["joint_index_two"].as<double>();
 
                     auto raw_safe_distance = pos["safe_distance"].as<double>();
+
+                    vfi_mode_list_.push_back(VFI_manager::VFI_MODE::ROBOT_TO_ROBOT);
 
                     std::cout << raw_vfi_mode << ",\t"
                               << raw_cs_entity_one  << ",\t"
                               << raw_cs_entity_two << ",\t"
                               << raw_entity_one_primitive_type << ",\t"
                               << raw_entity_two_primitive_type << ",\t"
-                              << raw_robot_index_one << ",\t"
-                              << raw_robot_index_two  << ",\t"
                               << raw_joint_index_one << ",\t"
                               << raw_joint_index_two << ",\t"
                               << raw_safe_distance << std::endl;
