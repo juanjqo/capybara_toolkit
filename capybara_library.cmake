@@ -94,8 +94,7 @@ else()
         ${CAPYBARA_DIR}/src/vfi_framework.cpp
         ${CAPYBARA_DIR}/src/robot_constraints_manager.cpp
     )
-
-set(YAML_CPP yaml-cpp)
+    set(YAML_CPP yaml-cpp)
 
 
 endif()

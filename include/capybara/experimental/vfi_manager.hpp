@@ -33,6 +33,7 @@
 #include <dqrobotics/utils/DQ_Geometry.h>
 #include <capybara.hpp>
 #include <capybara/experimental/vfi_framework.hpp>
+#include <memory>
 
 using namespace Eigen;
 using namespace DQ_robotics;
