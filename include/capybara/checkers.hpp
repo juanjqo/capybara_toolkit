@@ -83,14 +83,16 @@ public:
     template<typename T, typename U>
     static bool check_equal_sizes(const T &v1,
                                   const U &v2,
-                                  const MODE& mode = Checkers::MODE::PANIC)
+                                  const MODE& mode = Checkers::MODE::PANIC,
+                                  const std::string& error_message = "")
     {
         std::size_t s1 = static_cast<std::size_t>(v1.size());
         std::size_t s2 = static_cast<std::size_t>(v2.size());
         if (s1 != s2)
         {
             if (mode == Checkers::MODE::PANIC)
-                throw std::runtime_error("Panic with Capybara::Checkers::check_equal_sizes(v1, v2). Both containers have diferent sizes. ");
+                throw std::runtime_error("Panic with Capybara::Checkers::check_equal_sizes(v1, v2). Both containers have diferent sizes. "
+                                         + error_message);
             return FAIL;
         }
         return SUCCESS;

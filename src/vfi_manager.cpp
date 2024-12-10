@@ -7,6 +7,8 @@ VFI_manager::VFI_manager(const int &dim_configuration, const LEVEL &level)
     :dim_configuration_(dim_configuration),level_(level)
 {
     constraint_manager_ = std::make_shared<Capybara::ConstraintsManager>(dim_configuration_);
+    if (level_ == VFI_Framework::LEVEL::ACCELERATIONS)
+        throw std::runtime_error("VFI_manager::VFI_manager Accelerations are unsupported!");
 }
 
 void VFI_manager::_add_vfi_constraint(const MatrixXd &Jd, const VectorXd &b, const DIRECTION &direction)
@@ -117,9 +119,42 @@ void VFI_manager::add_vfi_constraint(const DIRECTION &direction,
     }
 }
 
-std::tuple<MatrixXd, VectorXd> VFI_manager::get_vfi_constraints()
+void VFI_manager::set_joint_position_limits(const VectorXd &q_lower_bound, const VectorXd &q_upper_bound)
+{
+    Capybara::Checkers::check_equal_sizes(q_lower_bound, q_upper_bound, Capybara::Checkers::MODE::PANIC,
+                              std::string("The sizes are incompatibles. q_lower_bound has size ") + std::to_string(q_lower_bound.size())
+                            + std::string(" and q_upper_bound has size ") + std::to_string(q_upper_bound.size()));
+    Capybara::Checkers::check_equal_sizes(q_lower_bound, VectorXd::Zero(dim_configuration_),Capybara::Checkers::MODE::PANIC,
+                        std::string("The sizes are incompatibles. The joint limits have size ") + std::to_string(q_lower_bound.size())
+                            + std::string(" and the robot configuration has size ") + std::to_string(dim_configuration_));
+    q_min_ = q_lower_bound;
+    q_max_ = q_upper_bound;
+
+}
+
+void VFI_manager::set_joint_velocity_limits(const VectorXd &q_dot_lower_bound, const VectorXd &q_dot_upper_bound)
+{
+    Capybara::Checkers::check_equal_sizes(q_dot_lower_bound, q_dot_upper_bound, Capybara::Checkers::MODE::PANIC,
+                        std::string("The sizes are incompatibles. q_dot_lower_bound has size ") + std::to_string(q_dot_lower_bound.size())
+                            + std::string(" and q_dot_upper_bound has size ") + std::to_string(q_dot_upper_bound.size()));
+    Capybara::Checkers::check_equal_sizes(q_dot_lower_bound, VectorXd::Zero(dim_configuration_), Capybara::Checkers::MODE::PANIC,
+                        std::string("The sizes are incompatibles. The joint limits have size ") + std::to_string(q_dot_lower_bound.size())
+                            + std::string(" and the robot configuration has size ") + std::to_string(dim_configuration_));
+    q_dot_min_ = q_dot_lower_bound;
+    q_dot_max_ = q_dot_upper_bound;
+
+}
+
+std::tuple<MatrixXd, VectorXd> VFI_manager::get_inequality_constraints()
 {
     return constraint_manager_->get_inequality_constraints();
 }
+
+std::tuple<MatrixXd, VectorXd> VFI_manager::get_equality_constraints()
+{
+    return constraint_manager_->get_equality_constraints();
+}
+
+
 
 } // capybara namespace

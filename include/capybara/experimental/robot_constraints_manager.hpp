@@ -58,21 +58,26 @@ protected:
 
 
     std::vector<VFI_manager::VFI_MODE> vfi_mode_list_;
-
-
     std::vector<VFI_manager::VFI_TYPE> vfi_type_list_;
     std::vector<VFI_manager::DIRECTION> direction_list_;
     std::vector<double> safe_distance_list_;
-    std::vector<int> robot_index_list_;
-    std::vector<int> joint_index_list_;
-    std::vector<DQ> dq_offset_list_;
+    //std::vector<int> robot_index_list_;
+    //std::vector<DQ> dq_offset_list_;
     std::vector<DQ> robot_attached_dir_list_;
     std::vector<DQ> envir_attached_dir_list_;
     std::vector<DQ> workspace_derivative_list_;
-    std::vector<std::string> cs_entity_environment_list_;
+    std::vector<DQ> cs_entity_environment_DQ_list_;
+
+
+    std::vector<int> joint_index_list_one_;
+    std::vector<int> joint_index_list_two_;
+
+    std::vector<DQ> dq_offset_list_one_;
+    std::vector<DQ> dq_offset_list_two_;
 
     DQ _get_robot_primitive_offset_from_coppeliasim(const std::string& object_name, const int& joint_index);
     void _initial_settings();
+
 public:
     RobotConstraintsManager(const std::shared_ptr<DQ_CoppeliaSimInterfaceZMQExperimental>& coppelia_interface,
                             const std::shared_ptr<DQ_Kinematics>& robot,
@@ -84,8 +89,12 @@ public:
                             const std::string &config_path,
                             const VFI_manager::LEVEL& level = VFI_manager::LEVEL::VELOCITIES);
 
+    //void update_robot();
+
     std::tuple<MatrixXd, VectorXd> get_inequality_constraints(const VectorXd& q);
     std::tuple<MatrixXd, VectorXd> get_equality_constraints();
+
+    DQ test_fkm(const VectorXd& q) const;
 
 
 };

@@ -52,6 +52,10 @@ protected:
                              const VectorXd& b,
                              const DIRECTION& direction);
 
+    VectorXd q_dot_min_ = VectorXd::Zero(0);
+    VectorXd q_dot_max_ = VectorXd::Zero(0);
+    VectorXd q_min_ = VectorXd::Zero(0);
+    VectorXd q_max_ = VectorXd::Zero(0);
 
 
 public:
@@ -70,12 +74,15 @@ public:
                             const DQ& workspace_attached_direction,
                             const DQ& workspace_derivative = DQ(0));
 
+    void set_joint_position_limits(const VectorXd& q_lower_bound, const VectorXd& q_upper_bound);
+    void set_joint_velocity_limits(const VectorXd& q_dot_lower_bound, const VectorXd& q_dot_upper_bound);
     //void add_sovfi_constraint();
 
 
 
 
-    std::tuple<MatrixXd, VectorXd> get_vfi_constraints();
+    std::tuple<MatrixXd, VectorXd> get_inequality_constraints();
+    std::tuple<MatrixXd, VectorXd> get_equality_constraints();
 
 
 };
