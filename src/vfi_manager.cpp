@@ -46,7 +46,34 @@ void VFI_manager::add_vfi_joint_velocity_constraints()
 }
 
 
+void VFI_manager::_experimental_add_vfi_rpoint_to_rpoint(const double &safe_distance,
+                                                         const double &vfi_gain,
+                                                         const std::tuple<MatrixXd, DQ> &robot_pose_jacobian_and_pose_one,
+                                                         const std::tuple<MatrixXd, DQ> &robot_pose_jacobian_and_pose_two)
+{
+    const double square_safe_distance = pow(safe_distance, 2);
+    const MatrixXd robot_pose_jacobian_one = std::get<0>(robot_pose_jacobian_and_pose_one);
+    const DQ robot_pose_one = std::get<1>(robot_pose_jacobian_and_pose_one);
+    const MatrixXd robot_pose_jacobian_two = std::get<0>(robot_pose_jacobian_and_pose_two);
+    const DQ robot_pose_two = std::get<1>(robot_pose_jacobian_and_pose_two);
 
+    const DQ& x1 = robot_pose_one;
+    const DQ& x2 = robot_pose_two;
+    const MatrixXd& J1 = robot_pose_jacobian_one;
+    const MatrixXd& J2 = robot_pose_jacobian_two;
+    const DQ t1 = x1.translation();
+    const DQ t2 = x2.translation();
+    const MatrixXd Jt1 = DQ_Kinematics::translation_jacobian(J1, x1);
+    const MatrixXd Jt2 = DQ_Kinematics::translation_jacobian(J2, x2);
+
+    const MatrixXd Jd = 2*vec4(x1.translation()-x2.translation()).transpose()*(Jt1-Jt2);
+
+    const double square_d = DQ_Geometry::point_to_point_squared_distance(t1, t2);
+    const double residual = 0;
+    const double square_error = square_d- square_safe_distance;
+    VectorXd b = Capybara::CVectorXd({vfi_gain*(square_error) + residual});
+    _add_vfi_constraint(Jd, b, VFI_Framework::DIRECTION::KEEP_ROBOT_OUTSIDE);
+}
 
 
 void VFI_manager::add_vfi_constraint(const DIRECTION &direction,
@@ -144,6 +171,8 @@ void VFI_manager::add_vfi_constraint(const DIRECTION &direction,
     }
     }
 }
+
+
 
 void VFI_manager::set_joint_position_limits(const VectorXd &q_lower_bound, const VectorXd &q_upper_bound)
 {

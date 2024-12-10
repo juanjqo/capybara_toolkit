@@ -48,6 +48,12 @@ std::tuple<MatrixXd, VectorXd> RobotConstraintsManager::get_inequality_constrain
 
         }
         else{ //vfi_mode_list_.at(i) == VFI_manager::VFI_MODE::ROBOT_TO_ROBOT
+            DQ x1 =  (robot_->fkm(q, joint_index_list_one_.at(i)))*dq_offset_list_one_.at(i);
+            MatrixXd J1 = haminus8(dq_offset_list_one_.at(i))*robot_->pose_jacobian(q, joint_index_list_one_.at(i));
+            DQ x2 =  (robot_->fkm(q, joint_index_list_two_.at(i)))*dq_offset_list_two_.at(i);
+            MatrixXd J2 = haminus8(dq_offset_list_two_.at(i))*robot_->pose_jacobian(q, joint_index_list_two_.at(i));
+
+            VFI_M_->_experimental_add_vfi_rpoint_to_rpoint(safe_distance_list_.at(i), vfi_gain_, {J1, x1}, {J2, x2});
 
 
         }

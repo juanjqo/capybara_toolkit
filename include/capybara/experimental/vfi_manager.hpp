@@ -79,6 +79,12 @@ public:
                             const DQ& workspace_attached_direction,
                             const DQ& workspace_derivative = DQ(0));
 
+    void _experimental_add_vfi_rpoint_to_rpoint(const double& safe_distance,
+                                                const double& vfi_gain,
+                                                const std::tuple<MatrixXd, DQ>& robot_pose_jacobian_and_pose_one,
+                                                const std::tuple<MatrixXd, DQ>& robot_pose_jacobian_and_pose_two
+                                                );
+
     void set_joint_position_limits(const VectorXd& q_lower_bound, const VectorXd& q_upper_bound);
     void set_joint_velocity_limits(const VectorXd& q_dot_lower_bound, const VectorXd& q_dot_upper_bound);
     //void add_sovfi_constraint();
