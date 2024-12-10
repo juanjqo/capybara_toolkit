@@ -12,6 +12,8 @@ RobotConstraintsManager::RobotConstraintsManager(const std::shared_ptr<DQ_Coppel
     q_max_{q_max}, q_min_{q_min}, q_min_dot_{q_min_dot}, q_max_dot_{q_max_dot}
 {
     VFI_M_ = std::make_shared<Capybara::VFI_manager>(robot->get_dim_configuration_space());
+    VFI_M_->set_joint_position_limits(q_min_, q_max_);
+    VFI_M_->set_joint_velocity_limits(q_min_dot_, q_max_dot_);
     _initial_settings();
 }
 
@@ -19,6 +21,9 @@ std::tuple<MatrixXd, VectorXd> RobotConstraintsManager::get_inequality_constrain
 {
     const int n = vfi_mode_list_.size();
     const int robot_dim = robot_->get_dim_configuration_space();
+
+    VFI_M_->add_vfi_joint_position_constraints(vfi_gain_, q);
+    VFI_M_->add_vfi_joint_velocity_constraints();
 
     for (int i = 0; i<n; i++)
     {

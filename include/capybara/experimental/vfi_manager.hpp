@@ -56,6 +56,11 @@ protected:
     VectorXd q_dot_max_ = VectorXd::Zero(0);
     VectorXd q_min_ = VectorXd::Zero(0);
     VectorXd q_max_ = VectorXd::Zero(0);
+    MatrixXd I_;
+
+    void _check_vector_initialization(const VectorXd& q, const std::string &msg);
+
+
 
 
 public:
@@ -79,6 +84,8 @@ public:
     //void add_sovfi_constraint();
 
 
+    void add_vfi_joint_position_constraints(const double& gain, const VectorXd& current_joint_positions);
+    void add_vfi_joint_velocity_constraints();
 
 
     std::tuple<MatrixXd, VectorXd> get_inequality_constraints();

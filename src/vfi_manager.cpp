@@ -7,6 +7,7 @@ VFI_manager::VFI_manager(const int &dim_configuration, const LEVEL &level)
     :dim_configuration_(dim_configuration),level_(level)
 {
     constraint_manager_ = std::make_shared<Capybara::ConstraintsManager>(dim_configuration_);
+    I_ = MatrixXd::Identity(dim_configuration_, dim_configuration_);
     if (level_ == VFI_Framework::LEVEL::ACCELERATIONS)
         throw std::runtime_error("VFI_manager::VFI_manager Accelerations are unsupported!");
 }
@@ -17,6 +18,31 @@ void VFI_manager::_add_vfi_constraint(const MatrixXd &Jd, const VectorXd &b, con
         constraint_manager_->add_inequality_constraint(-Jd, b);
     else
         constraint_manager_->add_inequality_constraint(Jd, -b);
+}
+
+void VFI_manager::_check_vector_initialization(const VectorXd &q, const std::string &msg)
+{
+    if (q.size() == 0)
+    {
+        throw std::runtime_error(msg);
+    }
+
+}
+
+void VFI_manager::add_vfi_joint_position_constraints(const double &gain, const VectorXd &current_joint_positions)
+{
+    _check_vector_initialization(q_min_, std::string("The joint position limits were not defined."));
+    constraint_manager_->add_inequality_constraint(-I_,   gain*(current_joint_positions - q_min_));
+    constraint_manager_->add_inequality_constraint( I_,  -gain*(current_joint_positions - q_max_));
+
+}
+
+void VFI_manager::add_vfi_joint_velocity_constraints()
+{
+    _check_vector_initialization(q_dot_min_, std::string("The joint velocity limits were not defined."));
+    constraint_manager_->add_inequality_constraint(-I_, -q_dot_min_);
+    constraint_manager_->add_inequality_constraint( I_,  q_dot_max_);
+
 }
 
 
