@@ -23,6 +23,7 @@
 
 
 #pragma once
+#include "RobotDriverCoppeliaSim.h"
 #include <capybara/capytypes.hpp>
 #ifdef _WIN32
 #include <Eigen/Dense>
@@ -48,6 +49,9 @@ protected:
     VFI_manager::LEVEL level_;
     std::shared_ptr<DQ_Kinematics> robot_;
     std::shared_ptr<DQ_CoppeliaSimRobot> coppelia_robot_;
+    std::shared_ptr<RobotDriverCoppeliaSim> robot_driver_coppeliasim_;
+    bool cs_client_available_{true};
+
     std::shared_ptr<Capybara::VFI_manager> VFI_M_;
     double vfi_gain_{0.5};
 
@@ -55,6 +59,7 @@ protected:
     VectorXd q_min_;
     VectorXd q_min_dot_;
     VectorXd q_max_dot_;
+    VectorXd initial_robot_configuration_;
 
 
     std::vector<VFI_manager::VFI_MODE> vfi_mode_list_;
@@ -82,6 +87,16 @@ public:
     RobotConstraintsManager(const std::shared_ptr<DQ_CoppeliaSimInterfaceZMQExperimental>& coppelia_interface,
                             const std::shared_ptr<DQ_Kinematics>& robot,
                             const std::shared_ptr<DQ_CoppeliaSimRobot>& coppelia_robot,
+                            const VectorXd& q_min,
+                            const VectorXd& q_max,
+                            const VectorXd& q_min_dot,
+                            const VectorXd& q_max_dot,
+                            const std::string &config_path,
+                            const VFI_manager::LEVEL& level = VFI_manager::LEVEL::VELOCITIES);
+
+    RobotConstraintsManager(const std::shared_ptr<DQ_Kinematics>& robot,
+                            const VectorXd& initial_robot_configuration,
+                            const std::shared_ptr<RobotDriverCoppeliaSim>& robot_driver_coppeliasim,
                             const VectorXd& q_min,
                             const VectorXd& q_max,
                             const VectorXd& q_min_dot,
