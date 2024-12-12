@@ -101,6 +101,7 @@ VectorXd Capybara::CustomControllers::compute_setpoint_control_signal(const DQ &
  */
 VectorXd Capybara::CustomControllers::_compute_setpoint_using_POSITION_AND_ORIENTATION_COMBINATION(const DQ &x, const DQ &xd, const MatrixXd &pose_jacobian, const std::tuple<MatrixXd, VectorXd> &inequality_constraints, const std::tuple<MatrixXd, VectorXd> &equality_constraints)
 {
+    VectorXd u;
     VectorXd et = vec4(x.translation() - xd.translation());
     VectorXd er = _get_rotation_error(x, xd);
 
@@ -123,12 +124,23 @@ VectorXd Capybara::CustomControllers::_compute_setpoint_using_POSITION_AND_ORIEN
     MatrixXd H = alpha_*Ht + (1.0 - alpha_)*Hr + Hd;
     VectorXd f = alpha_*ft + (1.0 - alpha_)*fr;
 
+    auto A = std::get<0>(inequality_constraints);
+    auto b = std::get<1>(inequality_constraints);
+    auto Aeq = std::get<0>(equality_constraints);
+    auto beq = std::get<1>(equality_constraints);
 
-    VectorXd u = solver_->solve_quadratic_program(H,
-                                                  f,
-                                                  std::get<0>(inequality_constraints),
-                                                  std::get<1>(inequality_constraints),
-                                                  std::get<0>(equality_constraints),
-                                                  std::get<1>(equality_constraints));
+    try {
+        u = solver_->solve_quadratic_program(H,
+                                                      f,
+                                                      std::get<0>(inequality_constraints),
+                                                      std::get<1>(inequality_constraints),
+                                                      std::get<0>(equality_constraints),
+                                                      std::get<1>(equality_constraints));
+    } catch (...) {
+        u = VectorXd::Zero(pose_jacobian.cols());
+        std::cerr<<"Capybara::CustomControllers::Failed to solve the optimization problem!"<<std::endl;
+    }
+
+
     return u;
 }
