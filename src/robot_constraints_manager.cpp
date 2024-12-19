@@ -17,6 +17,7 @@ RobotConstraintsManager::RobotConstraintsManager(const std::shared_ptr<DQ_Coppel
     _initial_settings();
 }
 
+/*
 RobotConstraintsManager::RobotConstraintsManager(const std::shared_ptr<DQ_Kinematics> &robot,
                                                  const VectorXd& initial_robot_configuration,
                                                  const std::shared_ptr<RobotDriverCoppeliaSim> &robot_driver_coppeliasim,
@@ -31,6 +32,7 @@ RobotConstraintsManager::RobotConstraintsManager(const std::shared_ptr<DQ_Kinema
 {
 
 }
+*/
 
 std::tuple<MatrixXd, VectorXd> RobotConstraintsManager::get_inequality_constraints(const VectorXd &q)
 {
