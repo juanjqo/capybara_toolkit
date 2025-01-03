@@ -22,6 +22,7 @@
 */
 
 #pragma once
+#include <vector>
 #include <capybara/capytypes.hpp>
 #include <capybara/numpy.hpp>
 
