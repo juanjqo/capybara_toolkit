@@ -48,6 +48,7 @@ protected:
     double gain_   {0.1};
     double damping_{0.05};
     double alpha_  {0.99};
+    double region_size_{0.5};
 
     VectorXd _get_rotation_error(const DQ& x, const DQ& xd);
 
@@ -62,6 +63,7 @@ public:
     void set_proportional_gain(const double& gain);
     void set_damping(const double& damping);
     void set_alpha(const double& alpha);
+    void set_region_size(const double& region_size);
     VectorXd compute_setpoint_control_signal(const DQ& x,
                                              const DQ& xd,
                                              const MatrixXd& pose_jacobian,
