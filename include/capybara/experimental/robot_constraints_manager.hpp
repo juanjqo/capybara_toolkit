@@ -53,7 +53,7 @@ protected:
     bool cs_client_available_{true};
 
     std::shared_ptr<Capybara::VFI_manager> VFI_M_;
-    double vfi_gain_{0.5};
+    double vfi_gain_{1};
 
     VectorXd q_max_;
     VectorXd q_min_;
