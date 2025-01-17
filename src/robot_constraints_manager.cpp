@@ -250,9 +250,11 @@ void RobotConstraintsManager::_initial_settings()
 
     } catch(const YAML::BadFile& e) {
         std::cerr << e.msg << std::endl;
+        throw std::runtime_error(e.msg);
         //return 1;
     } catch(const YAML::ParserException& e) {
         std::cerr << e.msg << std::endl;
+        throw std::runtime_error(e.msg);
         //return 1;
     }
 
