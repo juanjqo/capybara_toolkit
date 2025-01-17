@@ -49,8 +49,6 @@ protected:
     VFI_manager::LEVEL level_;
     std::shared_ptr<DQ_Kinematics> robot_;
     std::shared_ptr<DQ_CoppeliaSimRobot> coppelia_robot_;
-   // std::shared_ptr<RobotDriverCoppeliaSim> robot_driver_coppeliasim_;
-    bool cs_client_available_{true};
 
     std::shared_ptr<Capybara::VFI_manager> VFI_M_;
     double vfi_gain_{1};

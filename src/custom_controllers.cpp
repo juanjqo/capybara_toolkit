@@ -38,6 +38,11 @@ void Capybara::CustomControllers::set_region_size(const double &region_size)
     region_size_ = region_size;
 }
 
+void Capybara::CustomControllers::set_region_exit_size(const double &region_exit_size)
+{
+    region_exit_size_ = region_exit_size;
+}
+
 /**
  * @brief Capybara::CustomControllers::get_rotation_error
  * @param x
@@ -110,10 +115,16 @@ VectorXd Capybara::CustomControllers::_compute_setpoint_using_POSITION_AND_ORIEN
     VectorXd et = vec4(x.translation() - xd.translation());
 
     double d = (x.translation()-xd.translation()).vec3().norm();
-    if (d <region_size_ )
+    if (d <region_size_ and !robot_reached_region)
     {
         et = VectorXd::Zero(4);
     }
+
+    if (d > region_exit_size_ )
+    {
+        robot_reached_region = false;
+    }
+
 
 
     VectorXd er = _get_rotation_error(x, xd);

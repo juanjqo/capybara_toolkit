@@ -49,6 +49,8 @@ protected:
     double damping_{0.05};
     double alpha_  {0.99};
     double region_size_{0.5};
+    double region_exit_size_{0.55};
+    bool robot_reached_region{false};
 
     VectorXd _get_rotation_error(const DQ& x, const DQ& xd);
 
@@ -64,6 +66,7 @@ public:
     void set_damping(const double& damping);
     void set_alpha(const double& alpha);
     void set_region_size(const double& region_size);
+    void set_region_exit_size(const double& region_exit_size);
     VectorXd compute_setpoint_control_signal(const DQ& x,
                                              const DQ& xd,
                                              const MatrixXd& pose_jacobian,

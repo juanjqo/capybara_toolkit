@@ -8,7 +8,7 @@ RobotConstraintsManager::RobotConstraintsManager(const std::shared_ptr<DQ_Coppel
                                                  const std::shared_ptr<DQ_CoppeliaSimRobot> &coppelia_robot, const VectorXd &q_min, const VectorXd &q_max, const VectorXd &q_min_dot, const VectorXd &q_max_dot,
                                                  const std::string &config_path,
                                                  const VFI_manager::LEVEL &level)
-    :vi_{coppelia_interface}, config_path_{config_path}, level_{level}, robot_{robot}, coppelia_robot_{coppelia_robot}, cs_client_available_{true},
+    :vi_{coppelia_interface}, config_path_{config_path}, level_{level}, robot_{robot}, coppelia_robot_{coppelia_robot},
     q_max_{q_max}, q_min_{q_min}, q_min_dot_{q_min_dot}, q_max_dot_{q_max_dot}
 {
     VFI_M_ = std::make_shared<Capybara::VFI_manager>(robot->get_dim_configuration_space());
@@ -17,22 +17,6 @@ RobotConstraintsManager::RobotConstraintsManager(const std::shared_ptr<DQ_Coppel
     _initial_settings();
 }
 
-/*
-RobotConstraintsManager::RobotConstraintsManager(const std::shared_ptr<DQ_Kinematics> &robot,
-                                                 const VectorXd& initial_robot_configuration,
-                                                 const std::shared_ptr<RobotDriverCoppeliaSim> &robot_driver_coppeliasim,
-                                                 const VectorXd &q_min,
-                                                 const VectorXd &q_max,
-                                                 const VectorXd &q_min_dot,
-                                                 const VectorXd &q_max_dot,
-                                                 const std::string &config_path,
-                                                 const VFI_Framework::LEVEL &level)
-    :config_path_{config_path}, level_{level}, robot_{robot}, robot_driver_coppeliasim_{robot_driver_coppeliasim},cs_client_available_{false},
-    q_max_{q_max}, q_min_{q_min}, q_min_dot_{q_min_dot}, q_max_dot_{q_max_dot}, initial_robot_configuration_{initial_robot_configuration}
-{
-
-}
-*/
 
 std::tuple<MatrixXd, VectorXd> RobotConstraintsManager::get_inequality_constraints(const VectorXd &q)
 {
@@ -93,14 +77,9 @@ DQ RobotConstraintsManager::_get_robot_primitive_offset_from_coppeliasim(const s
     //std::cout<<"Object name: "<<object_name<<std::endl;
     for (int i=0;i<5;i++)
     {
-        if (cs_client_available_)
-        {
-            q = coppelia_robot_->get_configuration_space();
-            xprimitive = vi_->get_object_pose(object_name);
-        }else{
-            q = initial_robot_configuration_;
-            xprimitive = DQ(1);
-        }
+
+        q = coppelia_robot_->get_configuration_space();
+        xprimitive = vi_->get_object_pose(object_name);
         x = robot_->fkm(q, joint_index);
         x_offset =  x.conj()*xprimitive;
     }
