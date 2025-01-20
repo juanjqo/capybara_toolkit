@@ -17,6 +17,11 @@ RobotConstraintsManager::RobotConstraintsManager(const std::shared_ptr<DQ_Coppel
     _initial_settings();
 }
 
+void RobotConstraintsManager::set_vfi_gain(const double &vfi_gain)
+{
+    vfi_gain_ = vfi_gain;
+}
+
 
 std::tuple<MatrixXd, VectorXd> RobotConstraintsManager::get_inequality_constraints(const VectorXd &q)
 {

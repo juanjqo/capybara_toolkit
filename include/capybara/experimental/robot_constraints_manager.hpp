@@ -92,6 +92,8 @@ public:
                             const std::string &config_path,
                             const VFI_manager::LEVEL& level = VFI_manager::LEVEL::VELOCITIES);
 
+    void set_vfi_gain(const double& vfi_gain);
+
     /*
     RobotConstraintsManager(const std::shared_ptr<DQ_Kinematics>& robot,
                             const VectorXd& initial_robot_configuration,
