@@ -22,6 +22,26 @@ void RobotConstraintsManager::set_vfi_gain(const double &vfi_gain)
     vfi_gain_ = vfi_gain;
 }
 
+double RobotConstraintsManager::get_line_to_line_angle()
+{
+    return VFI_M_->get_line_to_line_angle();
+}
+
+int RobotConstraintsManager::get_number_of_constrants()
+{
+    return number_of_constraints_;
+}
+
+DQ RobotConstraintsManager::get_robot_line()
+{
+    return robot_line_ ;
+}
+
+DQ RobotConstraintsManager::get_workspace_line()
+{
+    return cs_entity_environment_DQ_list_.at(1);
+}
+
 
 std::tuple<MatrixXd, VectorXd> RobotConstraintsManager::get_inequality_constraints(const VectorXd &q)
 {
@@ -40,6 +60,13 @@ std::tuple<MatrixXd, VectorXd> RobotConstraintsManager::get_inequality_constrain
             if (J.cols() != robot_dim)
                 J = Capybara::Numpy::resize(J, J.rows(), robot_dim);
             DQ x_workspace = cs_entity_environment_DQ_list_.at(i);
+
+            if (vfi_type_list_.at(1) == VFI_manager::VFI_TYPE::RLINE_TO_LINE_ANGLE)
+            {
+                robot_line_ = x;
+                workspace_line_ = x_workspace;
+            }
+
 
             VFI_M_->add_vfi_constraint(direction_list_.at(i),
                                        vfi_type_list_.at(i),
@@ -73,6 +100,11 @@ DQ RobotConstraintsManager::test_fkm(const VectorXd &q) const
     return robot_->fkm(q);
 }
 
+void RobotConstraintsManager::set_joint_velocity_limits(const VectorXd &q_dot_lower_bound, const VectorXd &q_dot_upper_bound)
+{
+    VFI_M_->set_joint_velocity_limits(q_dot_lower_bound, q_dot_upper_bound);
+}
+
 DQ RobotConstraintsManager::_get_robot_primitive_offset_from_coppeliasim(const std::string &object_name, const int &joint_index)
 {
     DQ x;
@@ -100,6 +132,7 @@ void RobotConstraintsManager::_initial_settings()
         std::cout << "----------------------------------------------" <<std::endl;
         std::cout << "Config file path: " << config_path_ <<std::endl;
         std::cout << "Constraints found in the config file: " << config.size() <<std::endl;
+        number_of_constraints_ =  config.size() ;
         std::cout << "----------------------------------------------" <<std::endl;
         //----------------------------------------------------------------------------------
         std::cout<<"----------data----------------"<<std::endl;

@@ -58,6 +58,10 @@ protected:
     VectorXd q_max_ = VectorXd::Zero(0);
     MatrixXd I_;
 
+    double line_to_line_angle_;
+    DQ robot_line_{1};
+    DQ workspace_line_{1};
+
     void _check_vector_initialization(const VectorXd& q, const std::string &msg);
 
 
@@ -96,6 +100,10 @@ public:
 
     std::tuple<MatrixXd, VectorXd> get_inequality_constraints();
     std::tuple<MatrixXd, VectorXd> get_equality_constraints();
+
+    double get_line_to_line_angle();
+    DQ get_robot_line();
+    DQ get_workspace_line();
 
 
 };

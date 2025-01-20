@@ -59,6 +59,12 @@ protected:
     VectorXd q_max_dot_;
     VectorXd initial_robot_configuration_;
 
+    int number_of_constraints_;
+    double line_to_line_angle_;
+    DQ robot_line_{1};
+    DQ workspace_line_{1};
+
+
 
     std::vector<VFI_manager::VFI_MODE> vfi_mode_list_;
     std::vector<VFI_manager::VFI_TYPE> vfi_type_list_;
@@ -93,6 +99,11 @@ public:
                             const VFI_manager::LEVEL& level = VFI_manager::LEVEL::VELOCITIES);
 
     void set_vfi_gain(const double& vfi_gain);
+    double get_line_to_line_angle();
+
+    int get_number_of_constrants();
+    DQ get_robot_line();
+    DQ get_workspace_line();
 
     /*
     RobotConstraintsManager(const std::shared_ptr<DQ_Kinematics>& robot,
@@ -112,6 +123,8 @@ public:
     std::tuple<MatrixXd, VectorXd> get_equality_constraints();
 
     DQ test_fkm(const VectorXd& q) const;
+
+    void set_joint_velocity_limits(const VectorXd& q_dot_lower_bound, const VectorXd& q_dot_upper_bound);
 
 
 };

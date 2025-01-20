@@ -151,6 +151,9 @@ void VFI_manager::add_vfi_constraint(const DIRECTION &direction,
         const MatrixXd Jfphi = DQ_Kinematics::line_to_line_angle_jacobian(Jl,robot_line,workspace_line);
         const double fsafe = 2-2*cos(safe_angle);
         const double phi = DQ_Geometry::line_to_line_angle(robot_line, workspace_line);
+        robot_line_ = robot_line;
+        workspace_line_ = workspace_line;
+        line_to_line_angle_ = phi;
         const double f = 2-2*cos(phi);
         const double ferror = f-fsafe;
         const double residual = DQ_Kinematics::line_to_line_angle_residual(robot_line,workspace_line,-workspace_derivative);
@@ -208,6 +211,22 @@ std::tuple<MatrixXd, VectorXd> VFI_manager::get_inequality_constraints()
 std::tuple<MatrixXd, VectorXd> VFI_manager::get_equality_constraints()
 {
     return constraint_manager_->get_equality_constraints();
+}
+
+double VFI_manager::get_line_to_line_angle()
+{
+    return line_to_line_angle_;
+
+}
+
+DQ VFI_manager::get_robot_line()
+{
+    return robot_line_;
+}
+
+DQ VFI_manager::get_workspace_line()
+{
+    return workspace_line_;
 }
 
 
