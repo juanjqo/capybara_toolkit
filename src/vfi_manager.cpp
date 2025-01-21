@@ -46,7 +46,7 @@ void VFI_manager::add_vfi_joint_velocity_constraints()
 }
 
 
-void VFI_manager::_experimental_add_vfi_rpoint_to_rpoint(const double &safe_distance,
+std::tuple<double, double> VFI_manager::_experimental_add_vfi_rpoint_to_rpoint(const double &safe_distance,
                                                          const double &vfi_gain,
                                                          const std::tuple<MatrixXd, DQ> &robot_pose_jacobian_and_pose_one,
                                                          const std::tuple<MatrixXd, DQ> &robot_pose_jacobian_and_pose_two)
@@ -73,10 +73,11 @@ void VFI_manager::_experimental_add_vfi_rpoint_to_rpoint(const double &safe_dist
     const double square_error = square_d- square_safe_distance;
     VectorXd b = Capybara::CVectorXd({vfi_gain*(square_error) + residual});
     _add_vfi_constraint(Jd, b, VFI_Framework::DIRECTION::KEEP_ROBOT_OUTSIDE);
+    return {square_d , square_error};
 }
 
 
-void VFI_manager::add_vfi_constraint(const DIRECTION &direction,
+std::tuple<double, double> VFI_manager::add_vfi_constraint(const DIRECTION &direction,
                                      const VFI_TYPE &vfi_type,
                                      const double &safe_distance,
                                      const double &vfi_gain,
@@ -87,6 +88,7 @@ void VFI_manager::add_vfi_constraint(const DIRECTION &direction,
                                      const DQ &workspace_attached_direction,
                                      const DQ &workspace_derivative)
 {
+    std::tuple<double, double> rtn = {0,0};
     switch(vfi_type)
     {
 
@@ -104,6 +106,7 @@ void VFI_manager::add_vfi_constraint(const DIRECTION &direction,
         const double square_error = square_d- square_safe_distance;
         VectorXd b = Capybara::CVectorXd({vfi_gain*(square_error) + residual});
         _add_vfi_constraint(Jd, b, direction);
+        rtn = {square_d, square_error};
         break;
     }
     case VFI_TYPE::RPOINT_TO_PLANE:
@@ -120,6 +123,7 @@ void VFI_manager::add_vfi_constraint(const DIRECTION &direction,
         const double error = d - safe_distance;
         VectorXd b = Capybara::CVectorXd({vfi_gain*(error) + residual});
         _add_vfi_constraint(Jd, b, direction);
+        rtn = {d, error};
         break;
     }
 
@@ -138,6 +142,7 @@ void VFI_manager::add_vfi_constraint(const DIRECTION &direction,
         const double square_error = square_d - square_safe_distance;
         VectorXd b = Capybara::CVectorXd({vfi_gain*(square_error) + residual});
         _add_vfi_constraint(Jd, b, direction);
+        rtn = {square_d, square_error};
         break;
     }
     case VFI_TYPE::RLINE_TO_LINE_ANGLE:
@@ -159,6 +164,7 @@ void VFI_manager::add_vfi_constraint(const DIRECTION &direction,
         const double residual = DQ_Kinematics::line_to_line_angle_residual(robot_line,workspace_line,-workspace_derivative);
         VectorXd b = Capybara::CVectorXd({vfi_gain*(ferror) + residual});
         _add_vfi_constraint(Jfphi, b, direction);
+        rtn = {f, ferror};
         break;
     }
     case VFI_TYPE::RLINE_TO_LINE:
@@ -173,6 +179,7 @@ void VFI_manager::add_vfi_constraint(const DIRECTION &direction,
         break;
     }
     }
+    return rtn;
 }
 
 

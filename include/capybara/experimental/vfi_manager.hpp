@@ -72,7 +72,7 @@ public:
     VFI_manager(const int& dim_configuration,
                 const LEVEL& level = LEVEL::VELOCITIES);
 
-    void add_vfi_constraint(const DIRECTION& direction,
+    std::tuple<double, double> add_vfi_constraint(const DIRECTION& direction,
                             const VFI_TYPE& vfi_type,
                             const double& safe_distance,
                             const double& vfi_gain,
@@ -83,7 +83,7 @@ public:
                             const DQ& workspace_attached_direction,
                             const DQ& workspace_derivative = DQ(0));
 
-    void _experimental_add_vfi_rpoint_to_rpoint(const double& safe_distance,
+    std::tuple<double, double> _experimental_add_vfi_rpoint_to_rpoint(const double& safe_distance,
                                                 const double& vfi_gain,
                                                 const std::tuple<MatrixXd, DQ>& robot_pose_jacobian_and_pose_one,
                                                 const std::tuple<MatrixXd, DQ>& robot_pose_jacobian_and_pose_two

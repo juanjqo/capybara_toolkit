@@ -61,8 +61,7 @@ protected:
 
     int number_of_constraints_;
     double line_to_line_angle_;
-    DQ robot_line_{1};
-    DQ workspace_line_{1};
+
 
 
 
@@ -84,6 +83,8 @@ protected:
     std::vector<DQ> dq_offset_list_one_;
     std::vector<DQ> dq_offset_list_two_;
 
+    std::vector<std::tuple<double, double>> distances_and_error_distances_;
+
     DQ _get_robot_primitive_offset_from_coppeliasim(const std::string& object_name, const int& joint_index);
     void _initial_settings();
 
@@ -101,9 +102,10 @@ public:
     void set_vfi_gain(const double& vfi_gain);
     double get_line_to_line_angle();
 
-    int get_number_of_constrants();
-    DQ get_robot_line();
-    DQ get_workspace_line();
+    int get_number_of_constraints();
+
+    std::vector<std::tuple<double, double>> get_distances_and_error_distances();
+
 
     /*
     RobotConstraintsManager(const std::shared_ptr<DQ_Kinematics>& robot,

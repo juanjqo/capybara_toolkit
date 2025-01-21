@@ -27,19 +27,14 @@ double RobotConstraintsManager::get_line_to_line_angle()
     return VFI_M_->get_line_to_line_angle();
 }
 
-int RobotConstraintsManager::get_number_of_constrants()
+int RobotConstraintsManager::get_number_of_constraints()
 {
     return number_of_constraints_;
 }
 
-DQ RobotConstraintsManager::get_robot_line()
+std::vector<std::tuple<double, double> > RobotConstraintsManager::get_distances_and_error_distances()
 {
-    return robot_line_ ;
-}
-
-DQ RobotConstraintsManager::get_workspace_line()
-{
-    return cs_entity_environment_DQ_list_.at(1);
+    return distances_and_error_distances_;
 }
 
 
@@ -51,6 +46,8 @@ std::tuple<MatrixXd, VectorXd> RobotConstraintsManager::get_inequality_constrain
     VFI_M_->add_vfi_joint_position_constraints(vfi_gain_, q);
     VFI_M_->add_vfi_joint_velocity_constraints();
 
+    std::vector<std::tuple<double, double>> distances_and_error_distances;
+
     for (int i = 0; i<n; i++)
     {
         if (vfi_mode_list_.at(i) == VFI_manager::VFI_MODE::ENVIRONMENT_TO_ROBOT)
@@ -61,12 +58,7 @@ std::tuple<MatrixXd, VectorXd> RobotConstraintsManager::get_inequality_constrain
                 J = Capybara::Numpy::resize(J, J.rows(), robot_dim);
             DQ x_workspace = cs_entity_environment_DQ_list_.at(i);
 
-            if (vfi_type_list_.at(1) == VFI_manager::VFI_TYPE::RLINE_TO_LINE_ANGLE)
-            {
-                robot_line_ = x;
-                workspace_line_ = x_workspace;
-            }
-
+            distances_and_error_distances.push_back(
 
             VFI_M_->add_vfi_constraint(direction_list_.at(i),
                                        vfi_type_list_.at(i),
@@ -77,7 +69,8 @@ std::tuple<MatrixXd, VectorXd> RobotConstraintsManager::get_inequality_constrain
                                        robot_attached_dir_list_.at(i),
                                        x_workspace,
                                        envir_attached_dir_list_.at(i),
-                                       workspace_derivative_list_.at(i));
+                                       workspace_derivative_list_.at(i))
+                );
 
         }
         else{ //vfi_mode_list_.at(i) == VFI_manager::VFI_MODE::ROBOT_TO_ROBOT
@@ -86,10 +79,13 @@ std::tuple<MatrixXd, VectorXd> RobotConstraintsManager::get_inequality_constrain
             DQ x2 =  (robot_->fkm(q, joint_index_list_two_.at(i)))*dq_offset_list_two_.at(i);
             MatrixXd J2 = haminus8(dq_offset_list_two_.at(i))*robot_->pose_jacobian(q, joint_index_list_two_.at(i));
 
-            VFI_M_->_experimental_add_vfi_rpoint_to_rpoint(safe_distance_list_.at(i), vfi_gain_, {J1, x1}, {J2, x2});
+            distances_and_error_distances.push_back(
+            VFI_M_->_experimental_add_vfi_rpoint_to_rpoint(safe_distance_list_.at(i), vfi_gain_, {J1, x1}, {J2, x2})
+                      );
 
 
         }
+        distances_and_error_distances_ = distances_and_error_distances;
     }
     return VFI_M_->get_inequality_constraints();
 
