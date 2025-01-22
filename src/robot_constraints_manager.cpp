@@ -17,10 +17,12 @@ RobotConstraintsManager::RobotConstraintsManager(const std::shared_ptr<DQ_Coppel
     _initial_settings();
 }
 
+/*
 void RobotConstraintsManager::set_vfi_gain(const double &vfi_gain)
 {
     vfi_gain_ = vfi_gain;
 }
+*/
 
 double RobotConstraintsManager::get_line_to_line_angle()
 {
@@ -43,7 +45,7 @@ std::tuple<MatrixXd, VectorXd> RobotConstraintsManager::get_inequality_constrain
     const int n = vfi_mode_list_.size();
     const int robot_dim = robot_->get_dim_configuration_space();
 
-    VFI_M_->add_vfi_joint_position_constraints(vfi_gain_, q);
+    VFI_M_->add_vfi_joint_position_constraints(vfi_position_constraints_gain_, q);
     VFI_M_->add_vfi_joint_velocity_constraints();
 
     std::vector<std::tuple<double, double>> distances_and_error_distances;
@@ -63,7 +65,7 @@ std::tuple<MatrixXd, VectorXd> RobotConstraintsManager::get_inequality_constrain
             VFI_M_->add_vfi_constraint(direction_list_.at(i),
                                        vfi_type_list_.at(i),
                                        safe_distance_list_.at(i),
-                                       vfi_gain_,
+                                       vfi_gain_list_.at(i),
                                        J,
                                        x,
                                        robot_attached_dir_list_.at(i),
@@ -80,7 +82,7 @@ std::tuple<MatrixXd, VectorXd> RobotConstraintsManager::get_inequality_constrain
             MatrixXd J2 = haminus8(dq_offset_list_two_.at(i))*robot_->pose_jacobian(q, joint_index_list_two_.at(i));
 
             distances_and_error_distances.push_back(
-            VFI_M_->_experimental_add_vfi_rpoint_to_rpoint(safe_distance_list_.at(i), vfi_gain_, {J1, x1}, {J2, x2})
+            VFI_M_->_experimental_add_vfi_rpoint_to_rpoint(safe_distance_list_.at(i), vfi_gain_list_.at(i), {J1, x1}, {J2, x2})
                       );
 
 
@@ -159,6 +161,7 @@ void RobotConstraintsManager::_initial_settings()
                     //auto raw_robot_index = pos["robot_index"].as<double>();
                     auto raw_joint_index =  pos["joint_index"].as<double>();
                     auto raw_safe_distance = pos["safe_distance"].as<double>();
+                    auto raw_vfi_gain = pos["vfi_gain"].as<double>();
                     auto raw_direction =  pos["direction"].as<std::string>();
                     auto raw_entity_robot_attached_direction = pos["entity_robot_attached_direction"].as<std::string>();
                     auto raw_entity_environment_attached_direction = pos["entity_environment_attached_direction"].as<std::string>();
@@ -168,6 +171,7 @@ void RobotConstraintsManager::_initial_settings()
                                                                                         raw_entity_environment_primitive_type));
                     direction_list_.    push_back(VFI_Framework::map_string_to_direction(raw_direction));
                     safe_distance_list_.push_back(raw_safe_distance);
+                    vfi_gain_list_.push_back(raw_vfi_gain);
                     joint_index_list_one_.push_back(raw_joint_index);
                     joint_index_list_two_.push_back(-1);
 
@@ -221,6 +225,7 @@ void RobotConstraintsManager::_initial_settings()
                     auto raw_joint_index_two =  pos["joint_index_two"].as<double>();
 
                     auto raw_safe_distance = pos["safe_distance"].as<double>();
+                    auto raw_vfi_gain = pos["vfi_gain"].as<double>();
 
                     vfi_mode_list_.push_back(VFI_manager::VFI_MODE::ROBOT_TO_ROBOT);
                     vfi_type_list_.push_back(VFI_Framework::map_strings_to_vfiType(raw_entity_one_primitive_type,
@@ -229,6 +234,7 @@ void RobotConstraintsManager::_initial_settings()
 
                     direction_list_.push_back(VFI_Framework::DIRECTION::KEEP_ROBOT_OUTSIDE);
                     safe_distance_list_.push_back(raw_safe_distance);
+                    vfi_gain_list_.push_back(raw_vfi_gain);
 
                     joint_index_list_one_.push_back(raw_joint_index_one);
                     joint_index_list_two_.push_back(raw_joint_index_two);

@@ -51,7 +51,7 @@ protected:
     std::shared_ptr<DQ_CoppeliaSimRobot> coppelia_robot_;
 
     std::shared_ptr<Capybara::VFI_manager> VFI_M_;
-    double vfi_gain_{0.5};
+    double vfi_position_constraints_gain_{0.5};
 
     VectorXd q_max_;
     VectorXd q_min_;
@@ -76,7 +76,7 @@ protected:
     std::vector<DQ> workspace_derivative_list_;
     std::vector<DQ> cs_entity_environment_DQ_list_;
 
-
+    std::vector<double> vfi_gain_list_;
     std::vector<int> joint_index_list_one_;
     std::vector<int> joint_index_list_two_;
 
@@ -99,7 +99,7 @@ public:
                             const std::string &config_path,
                             const VFI_manager::LEVEL& level = VFI_manager::LEVEL::VELOCITIES);
 
-    void set_vfi_gain(const double& vfi_gain);
+    //void set_vfi_gain(const double& vfi_gain);
     double get_line_to_line_angle();
 
     int get_number_of_constraints();
