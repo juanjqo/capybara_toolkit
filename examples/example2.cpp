@@ -8,7 +8,7 @@
 #endif
 
 #include <dqrobotics/DQ.h>
-#include <dqcapybara.hpp>
+#include <capybara/dqrobotics/rigid_motions.hpp>
 //#include <print> C++23
 //#include <expected> C++23
 
@@ -56,6 +56,8 @@ int main()
 
     auto x = Capybara::rotz(90);
     std::cout<<x<<std::endl;
+    DQ n = DQ(0,2,3,4).normalize();
+    std::cout<<"rot:  "<<Capybara::rot(1.5, n)<<std::endl;
 
     //std::println("number: {}, rounded: {}",num, np::round(num, 6)); C++23
 
@@ -65,12 +67,14 @@ int main()
     clock.show_elapsed_time(Capybara::Cronos::SCALE::MICROSECONDS);
     //clock.show_elapsed_hhmmss_time();
 
+    /*
     auto dl = Capybara::DataLogger(Capybara::DataLogger::TYPE::VECTORXD);
     dl.add_data(lim);
     dl.add_data(2*lim);
     dl.add_data(-lim);
     dl.show_data();
     dl.save_data("dl_data");
+*/
 
 
 
