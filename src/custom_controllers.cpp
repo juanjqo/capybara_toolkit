@@ -153,6 +153,13 @@ VectorXd Capybara::CustomControllers::_compute_setpoint_using_POSITION_AND_ORIEN
     auto Aeq = std::get<0>(equality_constraints);
     auto beq = std::get<1>(equality_constraints);
 
+    u = solver_->solve_quadratic_program(H,
+                                         f,
+                                         std::get<0>(inequality_constraints),
+                                         std::get<1>(inequality_constraints),
+                                         std::get<0>(equality_constraints),
+                                         std::get<1>(equality_constraints));
+    /*
     try {
         u = solver_->solve_quadratic_program(H,
                                                       f,
@@ -164,6 +171,7 @@ VectorXd Capybara::CustomControllers::_compute_setpoint_using_POSITION_AND_ORIEN
         u = VectorXd::Zero(pose_jacobian.cols());
         std::cerr<<"Capybara::CustomControllers::Failed to solve the optimization problem!"<<std::endl;
     }
+*/
 
 
     return u;
