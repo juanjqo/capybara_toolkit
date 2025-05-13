@@ -51,7 +51,7 @@ protected:
     std::shared_ptr<DQ_CoppeliaSimRobot> coppelia_robot_;
 
     std::shared_ptr<Capybara::VFI_manager> VFI_M_;
-    double vfi_position_constraints_gain_{0.5};
+    double vfi_position_constraints_gain_{8.0};
 
     VectorXd q_max_;
     VectorXd q_min_;
