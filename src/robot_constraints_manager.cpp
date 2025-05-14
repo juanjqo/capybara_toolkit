@@ -17,6 +17,11 @@ RobotConstraintsManager::RobotConstraintsManager(const std::shared_ptr<DQ_Coppel
     _initial_settings();
 }
 
+void RobotConstraintsManager::set_vfi_position_constraints_gain(const double &vfi_position_constraints_gain)
+{
+    vfi_position_constraints_gain_ = vfi_position_constraints_gain;
+}
+
 /*
 void RobotConstraintsManager::set_vfi_gain(const double &vfi_gain)
 {

@@ -100,6 +100,7 @@ public:
                             const VFI_manager::LEVEL& level = VFI_manager::LEVEL::VELOCITIES);
 
     //void set_vfi_gain(const double& vfi_gain);
+    void set_vfi_position_constraints_gain(const double& vfi_position_constraints_gain);
     double get_line_to_line_angle();
 
     int get_number_of_constraints();
