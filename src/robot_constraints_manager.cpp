@@ -118,7 +118,7 @@ DQ RobotConstraintsManager::_get_robot_primitive_offset_from_coppeliasim(const s
     for (int i=0;i<5;i++)
     {
 
-        q = coppelia_robot_->get_configuration_space();
+        q = coppelia_robot_->get_configuration();
         xprimitive = vi_->get_object_pose(object_name);
         x = robot_->fkm(q, joint_index);
         x_offset =  x.conj()*xprimitive;
